@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/SIsilicon.3d.text/label_3d.gd" type="Script" id=1]
+[ext_resource path="res://Position.gd" type="Script" id=2]
+
+[node name="Position" type="Position3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.858953, 1.34211, -1.09284 )
+script = ExtResource( 2 )
+
+[node name="Label3D" type="Spatial" parent="."]
+script = ExtResource( 1 )
+text = ""
+text_size = 1.0
+font = null
+align = 2
+billboard = true
+color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+roughness = 0.5
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.017
+min_steps = 32
+max_steps = 256
+
+[node name="shrink" type="Timer" parent="."]
+wait_time = 0.042
+
+[connection signal="timeout" from="shrink" to="." method="ShrinkTimeout"]

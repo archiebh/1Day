@@ -1,0 +1,491 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://FirstPerson.gd" type="Script" id=1]
+[ext_resource path="res://handgun.png" type="Texture" id=2]
+[ext_resource path="res://cros.png" type="Texture" id=3]
+[ext_resource path="res://swrds.png" type="Texture" id=4]
+[ext_resource path="res://Slash.tres" type="Animation" id=5]
+[ext_resource path="res://slash.mp3" type="AudioStream" id=6]
+[ext_resource path="res://cut.mp3" type="AudioStream" id=7]
+[ext_resource path="res://jump.mp3" type="AudioStream" id=8]
+[ext_resource path="res://walking.mp3" type="AudioStream" id=9]
+[ext_resource path="res://running.mp3" type="AudioStream" id=10]
+[ext_resource path="res://sliding.mp3" type="AudioStream" id=11]
+[ext_resource path="res://skin.tres" type="Material" id=12]
+[ext_resource path="res://hanf/22.obj" type="ArrayMesh" id=13]
+[ext_resource path="res://hanf/palm.obj" type="ArrayMesh" id=14]
+[ext_resource path="res://hanf/41.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://hanf/42.obj" type="ArrayMesh" id=16]
+[ext_resource path="res://hanf/11.obj" type="ArrayMesh" id=17]
+[ext_resource path="res://hanf/wrist.obj" type="ArrayMesh" id=18]
+[ext_resource path="res://hanf/21.obj" type="ArrayMesh" id=19]
+[ext_resource path="res://hanf/32.obj" type="ArrayMesh" id=20]
+[ext_resource path="res://hanf/31.obj" type="ArrayMesh" id=21]
+[ext_resource path="res://hanf/51.obj" type="ArrayMesh" id=22]
+[ext_resource path="res://hanf/52.obj" type="ArrayMesh" id=23]
+[ext_resource path="res://hanf/12.obj" type="ArrayMesh" id=24]
+[ext_resource path="res://flip.mp3" type="AudioStream" id=25]
+[ext_resource path="res://theme.tres" type="Theme" id=26]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.5
+mid_height = 1.5
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.44897, 0.446559, 0.444337 )
+
+[sub_resource type="PrismMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+metallic = 0.1
+metallic_specular = 0.32
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.537255, 0.337255, 0, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="Animation" id=8]
+resource_name = "Block"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Camera/Hand:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.038, -0.011, -0.064 ), Vector3( 0.053, -0.011, -0.064 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Camera/Hand:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -25.101, 0.001, 0.16 ), Vector3( -23.252, -25.299, -1.126 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head/Camera/MeleeWeapon:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.115, -0.118, -0.144 ), Vector3( 0.138, -0.024, -0.094 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head/Camera/MeleeWeapon:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -1.772, -0.398, 3.807 ), Vector3( 4.806, -3.598, 81.645 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "BlockRelease"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Camera/Hand:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.053, -0.011, -0.064 ), Vector3( -0.038, -0.011, -0.064 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Camera/Hand:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -23.252, -25.299, -1.126 ), Vector3( -25.101, 0.001, 0.16 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head/Camera/MeleeWeapon:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.138, -0.024, -0.094 ), Vector3( 0.115, -0.118, -0.144 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head/Camera/MeleeWeapon:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 4.806, -3.598, 81.645 ), Vector3( -1.772, -0.398, 3.807 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Camera/Hand:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -25.101, 0.001, 0.16 ), Vector3( -1.804, -162.258, 2.435 ), Vector3( -25.101, 0.001, 0.16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Camera/Hand/Wrist/Palm/1/tip:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head/Camera/Hand/Wrist/Palm/1/tip:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -4.779, 9.114, -2.674 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Head/Camera/Hand/Wrist/Palm/2/tip:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.711, -3.57, -1.889 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Head/Camera/Hand/Wrist/Palm/4/tip:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.545, -4.044, -2.542 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Head/Camera/Hand:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.038, -0.011, -0.064 ), Vector3( -0.065, -0.018, -0.076 ), Vector3( -0.038, -0.011, -0.064 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Head/Camera/Hand/Wrist/Palm/5/tip:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.384, -3.482, -2.712 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Camera/MeleeWeapon:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -1.772, -0.398, 3.807 ), Vector3( -57.562, -0.398, 3.807 ), Vector3( -57.562, -0.398, 3.807 ), Vector3( -1.772, -0.398, 3.807 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Camera/MeleeWeapon:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.04, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.115, -0.118, -0.144 ), Vector3( 0.112, -0.121, -0.105 ), Vector3( 0.112, -0.129, -0.171 ), Vector3( 0.115, -0.118, -0.144 ) ]
+}
+
+[node name="FirstPerson" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.000148296, 0, -0.00810635 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09216, 0 )
+
+[node name="Camera" type="Camera" parent="Head"]
+
+[node name="Hitbox" type="Area" parent="Head/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.28303 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Head/Camera/Hitbox"]
+transform = Transform( 1, 0, 0, 0, 0.851, 0, 0, 0, 2, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="MeleeWeapon" type="Spatial" parent="Head/Camera"]
+transform = Transform( 0.199557, -0.013236, -0.00138861, 0.0132728, 0.199463, 0.00618448, 0.000975594, -0.0062629, 0.1999, 0.115, -0.118, -0.144 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Head/Camera/MeleeWeapon"]
+transform = Transform( 0.023, 0, 0, 0, 0.543, 0, 0, 0, 0.025, 0.00093466, 0.548601, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Head/Camera/MeleeWeapon/MeshInstance2"]
+transform = Transform( 1.478, 0, 0, 0, 0.06, 0, 0, 0, 1.661, 0.0697021, -0.609899, 0 )
+material_override = SubResource( 6 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="SwordHand" type="Spatial" parent="Head/Camera/MeleeWeapon"]
+transform = Transform( 0.00177699, -0.0082717, -0.0181224, 0.0161197, 0.0112872, -0.00357124, 0.0117045, -0.0142891, 0.00766974, 0.021, 0.09, 0.167 )
+
+[node name="Wrist" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand"]
+mesh = ExtResource( 18 )
+material/0 = ExtResource( 12 )
+
+[node name="Palm" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist"]
+transform = Transform( 0.999228, 0.0324386, -0.0221491, -0.0275054, 0.980417, 0.195005, 0.028041, -0.194245, 0.980552, 0.256, -0.361, -0.662 )
+mesh = ExtResource( 14 )
+material/0 = ExtResource( 12 )
+
+[node name="1" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.054, -0.149, -0.829 )
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm/1"]
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 12 )
+
+[node name="2" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.184 )
+mesh = ExtResource( 19 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm/2"]
+transform = Transform( 0.999989, 0.0045902, 0, -0.0045902, 0.999989, 0, 0, 0, 1, 0, 0, 0 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 12 )
+
+[node name="3" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.912 )
+mesh = ExtResource( 21 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm/3"]
+mesh = ExtResource( 20 )
+material/0 = ExtResource( 12 )
+
+[node name="4" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.088 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm/4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.674, -1.288, 3.845 )
+mesh = ExtResource( 16 )
+material/0 = ExtResource( 12 )
+
+[node name="5" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.975 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/MeleeWeapon/SwordHand/Wrist/Palm/5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.037, 0, 0 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 12 )
+
+[node name="Hand" type="Spatial" parent="Head/Camera"]
+transform = Transform( 0.00199999, -5.59985e-06, 3.16101e-08, 5.0576e-06, 0.00181112, 0.00084843, -2.40417e-06, -0.000848427, 0.00181112, -0.038, -0.011, -0.064 )
+
+[node name="Wrist" type="MeshInstance" parent="Head/Camera/Hand"]
+mesh = ExtResource( 18 )
+material/0 = ExtResource( 12 )
+
+[node name="Palm" type="MeshInstance" parent="Head/Camera/Hand/Wrist"]
+transform = Transform( 0.999228, 0.0324386, -0.0221491, -0.0275054, 0.980417, 0.195005, 0.028041, -0.194245, 0.980552, 0.256, -0.361, -0.662 )
+mesh = ExtResource( 14 )
+material/0 = ExtResource( 12 )
+
+[node name="1" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm"]
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm/1"]
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 12 )
+
+[node name="2" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm"]
+mesh = ExtResource( 19 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm/2"]
+transform = Transform( 0.999989, 0.0045902, 0, -0.0045902, 0.999989, 0, 0, 0, 1, 0, 0, 0 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 12 )
+
+[node name="3" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm"]
+mesh = ExtResource( 21 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm/3"]
+mesh = ExtResource( 20 )
+material/0 = ExtResource( 12 )
+
+[node name="4" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm"]
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm/4"]
+mesh = ExtResource( 16 )
+material/0 = ExtResource( 12 )
+
+[node name="5" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm"]
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 12 )
+
+[node name="tip" type="MeshInstance" parent="Head/Camera/Hand/Wrist/Palm/5"]
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 12 )
+
+[node name="StrikePower" type="ProgressBar" parent="Head/Camera"]
+margin_top = 339.0
+margin_right = 640.0
+margin_bottom = 360.0
+theme = ExtResource( 26 )
+min_value = 5.0
+max_value = 25.0
+value = 25.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Head"]
+follow_viewport_enable = true
+
+[node name="Sprite" type="Sprite" parent="Head/CanvasLayer"]
+visible = false
+position = Vector2( 803.887, 551.357 )
+scale = Vector2( 0.497224, 0.343867 )
+texture = ExtResource( 2 )
+
+[node name="slash" type="AudioStreamPlayer2D" parent="Head"]
+position = Vector2( 289, 167 )
+stream = ExtResource( 6 )
+
+[node name="cut" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 7 )
+
+[node name="jump" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 8 )
+
+[node name="walk" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 9 )
+
+[node name="sprint" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 10 )
+
+[node name="slide" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 11 )
+
+[node name="flip" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 25 )
+
+[node name="cros" type="Sprite" parent="."]
+visible = false
+position = Vector2( 823.723, 411.864 )
+scale = Vector2( 0.101023, 0.10273 )
+texture = ExtResource( 3 )
+
+[node name="swrds" type="Sprite" parent="."]
+visible = false
+position = Vector2( 519.315, 235.558 )
+scale = Vector2( 0.423849, 0.321043 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Block = SubResource( 8 )
+anims/BlockRelease = SubResource( 9 )
+anims/Flip = SubResource( 10 )
+anims/Slash = ExtResource( 5 )
+anims/Stab = SubResource( 11 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="Timer" to="." method="StrikeTimeout"]

@@ -1,0 +1,460 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://pixel.gd" type="Script" id=1]
+[ext_resource path="res://FirstPerson.tscn" type="PackedScene" id=2]
+[ext_resource path="res://asphalst.tres" type="Material" id=3]
+[ext_resource path="res://Walle.tres" type="Material" id=4]
+[ext_resource path="res://grass2.png" type="Texture" id=5]
+[ext_resource path="res://skule.png" type="Texture" id=6]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/SIsilicon.3d.text/label_3d.gd" type="Script" id=8]
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[sub_resource type="ProceduralSky" id=2]
+radiance_size = 0
+sky_top_color = Color( 0.313726, 0.556863, 0.690196, 1 )
+sky_horizon_color = Color( 0.572549, 0.572549, 0.572549, 1 )
+sky_energy = 1.65
+ground_bottom_color = Color( 0.313726, 0.556863, 0.690196, 1 )
+ground_horizon_color = Color( 0.572549, 0.572549, 0.572549, 1 )
+ground_curve = 0.538176
+ground_energy = 11.8
+
+[sub_resource type="Environment" id=3]
+background_mode = 1
+background_sky = SubResource( 2 )
+background_color = Color( 0.352941, 0.478431, 0.517647, 1 )
+ambient_light_color = Color( 0.933333, 0.847059, 0.752941, 1 )
+fog_enabled = true
+fog_color = Color( 0.352941, 0.478431, 0.517647, 1 )
+fog_sun_color = Color( 0.239216, 0.0235294, 0.768627, 1 )
+fog_sun_amount = 0.29
+fog_depth_begin = 44.4
+fog_depth_end = 108.8
+fog_depth_curve = 0.999999
+fog_transmit_curve = 0.840896
+fog_height_min = -434.4
+tonemap_exposure = 2.69
+tonemap_white = 0.0
+dof_blur_far_distance = 21.31
+dof_blur_far_transition = 30.31
+dof_blur_far_quality = 0
+glow_intensity = 7.3
+glow_strength = 2.0
+glow_hdr_threshold = 1.09
+glow_hdr_luminance_cap = 131.98
+glow_hdr_scale = 4.0
+adjustment_enabled = true
+adjustment_brightness = 0.97
+adjustment_contrast = 1.02
+adjustment_saturation = 1.68
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 5 )
+uv1_scale = Vector3( 0.868, 0.806, 0.771 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 6 )
+uv1_scale = Vector3( 1.04, 1, 1 )
+uv1_offset = Vector3( -1.053, 0, 0 )
+uv1_triplanar = true
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="FirstPerson" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.984445, 0, -0.175693, 0, 1, 0, 0.175693, 0, -0.984445, -191.658, 14.8542, 0.781379 )
+
+[node name="Map" type="StaticBody" parent="."]
+physics_material_override = SubResource( 1 )
+constant_angular_velocity = Vector3( 0, 0, 9.8 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+
+[node name="Enemy" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -177.061, 15.2485, 0 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1.422, 0, 0, 0, 1.027, 0, 0, 0, 1.964, -135.341, 6.34304, 0.123615 )
+use_collision = true
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85282, 0 )
+width = 17.233
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner/Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.502, -5.77724, 0 )
+width = 28.6657
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner/Floor2/Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1549, 4.42584, 0.0181926 )
+width = 9.16201
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor3" type="CSGBox" parent="CSGCombiner/Floor2/Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5756, 8.36665, 0.0181926 )
+width = 11.2971
+height = 2.18013
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="CSGCombiner/Floor2"]
+transform = Transform( -14.984, 1.05727e-06, 0, -2.26252e-06, -7.002, 0, 0, 0, 1.983, 10.5918, 4.13024, -0.654325 )
+operation = 2
+polygon = PoolVector2Array( 0, 0, 0, 1, 1, 0 )
+material = ExtResource( 3 )
+
+[node name="Floor3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34.1312, 3.85282, 0 )
+width = 17.233
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner/Floor3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.502, -5.77724, 0 )
+width = 28.6657
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner/Floor3/Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1549, 4.42584, 0.0181926 )
+width = 9.16201
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor3" type="CSGBox" parent="CSGCombiner/Floor3/Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4153, 7.57798, 0.0181926 )
+width = 13.0174
+height = 2.18013
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="CSGCombiner/Floor3"]
+transform = Transform( -14.984, 1.05727e-06, 0, -2.26252e-06, -7.002, 0, 0, 0, 1.983, 10.5918, 4.13024, -0.654325 )
+operation = 2
+polygon = PoolVector2Array( 0, 0, 0, 1, 0.998167, 0.0651401 )
+material = ExtResource( 3 )
+
+[node name="Floor4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5214, 4.65409, 0 )
+width = 17.233
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner/Floor4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.502, -5.77724, 0 )
+width = 28.6657
+height = 5.78802
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner/Floor4/Floor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1549, 4.42584, 0.0181926 )
+width = 9.16201
+height = 23.4035
+depth = 7.37672
+material = ExtResource( 3 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="CSGCombiner/Floor4"]
+transform = Transform( -14.984, 1.05727e-06, 0, -2.26252e-06, -7.002, 0, 0, 0, 1.983, 10.5918, 4.13024, -0.654325 )
+operation = 2
+polygon = PoolVector2Array( 0, 0, 0, 1, 1, 0 )
+material = ExtResource( 3 )
+
+[node name="Label3D" type="Spatial" parent="CSGCombiner"]
+transform = Transform( 8.38599e-09, 0, -0.703235, 0, 0.97371, 0, 0.509165, 0, 6.07173e-09, -21.6303, 5.74669, 0.0256957 )
+script = ExtResource( 8 )
+text = "jump using space"
+text_size = 1.0
+font = null
+align = 0
+billboard = false
+color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+roughness = 0.52
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.164
+min_steps = 32
+max_steps = 256
+
+[node name="Label3D2" type="Spatial" parent="CSGCombiner"]
+transform = Transform( 8.38599e-09, 0, -0.703235, 0, 0.97371, 0, 0.509165, 0, 6.07173e-09, 17.3479, 6.46427, -0.0660662 )
+script = ExtResource( 8 )
+text = "sprint jump with shift + space"
+text_size = 1.0
+font = null
+align = 0
+billboard = false
+color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+roughness = 0.52
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.0
+min_steps = 32
+max_steps = 256
+
+[node name="Label3D" type="Spatial" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -59.0175, 16.508, 0.149834 )
+script = ExtResource( 8 )
+text = "grab walls by holding space
+after jumping
+
+climb by releasing 
+space while grabbing
+the wall"
+text_size = 1.0
+font = null
+align = 2
+billboard = false
+color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+roughness = 0.52
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.119
+min_steps = 32
+max_steps = 256
+
+[node name="CSGCombiner2" type="CSGCombiner" parent="."]
+transform = Transform( 1.422, 0, 0, 0, 1.027, 0, 0, 0, 1.964, 0, -2.6016, 0 )
+use_collision = true
+
+[node name="Floor" type="CSGBox" parent="CSGCombiner2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.8382, 0, 0 )
+width = 23.5828
+depth = 25.619
+material = ExtResource( 3 )
+
+[node name="Castle" type="CSGCombiner" parent="CSGCombiner2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5965, 0, 0 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 8.237, 0, 0, 0, 1, 16.7503, 1.7145, -5.68695 )
+width = 1.35772
+height = 2.0922
+depth = 6.45342
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox3"]
+transform = Transform( -0.027468, 0, 1.38063, 0, 1, 0, -0.72376, 0, -0.027468, 9.91873, 0, -2.9513 )
+width = 1.35772
+height = 2.0922
+depth = 14.999
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.5005 )
+width = 1.35772
+height = 2.0922
+depth = 6.45342
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox3"]
+transform = Transform( -0.027468, 0, 1.38063, 0, 1, 0, -0.72376, 0, -0.027468, 3.84939, 0, 14.1808 )
+width = 1.35772
+height = 2.0922
+depth = 6.45342
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox3"]
+transform = Transform( -0.998491, 0, -0.0758464, 0, 1, 0, 0.0397605, 0, -0.998492, 20.0096, 0, 4.05075 )
+width = 1.35772
+height = 2.0922
+depth = 14.999
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox3"]
+transform = Transform( 0.224646, 0, -1.34586, 0, 1, 0, 0.705528, 0, 0.224646, 14.0449, 0, 12.9148 )
+width = 1.35772
+height = 2.0922
+depth = 10.5479
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.819, 1.7145, 0 )
+height = 17.1678
+depth = 5.58964
+material = ExtResource( 4 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGCombiner2/Castle/CSGBox2"]
+transform = Transform( -0.0057247, -0.72221, 0, 1.38459, -0.0057247, 0, 0, 0, 1, 0.224028, 1.56516, 0.016312 )
+operation = 2
+radius = 2.19197
+height = 8.83994
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.720277, 6.7288, -1.58729 )
+operation = 2
+depth = 0.560267
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.720277, 6.7288, 0.0244119 )
+operation = 2
+depth = 0.560267
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner2/Castle/CSGBox2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.720277, 6.7288, 1.67463 )
+operation = 2
+depth = 0.560267
+material = ExtResource( 4 )
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 0.990399, -0.264365, 0, 0.0722874, 0.990399, 15.7267, 1.44315, -3.37915 )
+radius = 0.952937
+radial_segments = 4
+rings = 4
+material = SubResource( 4 )
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner2/Castle/CSGSphere"]
+transform = Transform( 1, 0, 0, 0, 0.989846, -0.271834, 0, 0.0743296, 0.989845, -1.10613, -0.238215, -0.81773 )
+radius = 1.23383
+radial_segments = 4
+rings = 4
+material = SubResource( 4 )
+
+[node name="CSGSphere2" type="CSGSphere" parent="CSGCombiner2/Castle/CSGSphere"]
+transform = Transform( 0.73221, -0.487167, 0.130039, 0.933978, 0.737328, 0.0701145, -0.0681693, 0.019172, 0.994882, 0, 2.09133, 7.83481 )
+radius = 0.952937
+radial_segments = 4
+rings = 4
+material = SubResource( 4 )
+
+[node name="CSGSphere" type="CSGSphere" parent="CSGCombiner2/Castle/CSGSphere/CSGSphere2"]
+transform = Transform( 1, 0, 0, 0, 0.989846, -0.271834, 0, 0.0743296, 0.989845, -1.10613, -0.238215, -0.81773 )
+radius = 1.23383
+radial_segments = 4
+rings = 4
+material = SubResource( 4 )
+
+[node name="CSGSphere2" type="CSGSphere" parent="CSGCombiner2/Castle"]
+transform = Transform( 0.602623, -0.576352, -0.00148126, 0, 0.00134392, -1.91236, 0.577797, 0.315119, 0.000809878, 15.0958, 8.36371, 0.021009 )
+radius = 0.374586
+radial_segments = 4
+rings = 4
+material = SubResource( 5 )
+
+[node name="CSGSphere3" type="CSGSphere" parent="CSGCombiner2/Castle/CSGSphere2"]
+transform = Transform( 1, 0, 0, 5.96046e-08, 1, 1.16415e-10, 0, 2.91038e-11, 1, -1.80269, -1.88486, -0.00132442 )
+radius = 0.374586
+radial_segments = 4
+rings = 4
+material = SubResource( 5 )
+
+[node name="CSGSphere4" type="CSGSphere" parent="CSGCombiner2/Castle/CSGSphere2/CSGSphere3"]
+transform = Transform( 1, 0, 0, 5.96046e-08, 1, 1.16415e-10, 0, 2.91038e-11, 1, 3.64808, 3.81436, 0.00268054 )
+radius = 0.374586
+radial_segments = 4
+rings = 4
+material = SubResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1.235, 0, 0, 0, 1.031, 17.1919, 9.53967, -7.39642 )
+height = 3.23452
+depth = 1.23822
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1.235, 0, 0, 0, 1.031, 17.1919, 9.53967, -5.04138 )
+height = 3.23452
+depth = 1.23822
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1.235, 0, 0, 0, 1.031, 17.1919, 9.53967, -2.91145 )
+height = 3.23452
+depth = 1.23822
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1.235, 0, 0, 0, 1.031, 17.1919, 9.53967, 3.8246 )
+height = 3.23452
+depth = 1.23822
+material = ExtResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1.235, 0, 0, 0, 1.031, 17.1919, 9.53967, 5.81159 )
+height = 3.23452
+depth = 1.23822
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 1, 0, 0, 0, 1.235, 0, 0, 0, 1.031, 17.1919, 9.53967, 7.9952 )
+height = 3.23452
+depth = 1.23822
+material = ExtResource( 4 )
+
+[node name="Floor2" type="CSGBox" parent="CSGCombiner2/Castle"]
+transform = Transform( 0.999552, 0, -0.0413351, 0, 1, 0, 0.0216688, 0, 0.999552, 18.5303, 0, -2.42789e-07 )
+width = 39.6281
+depth = 19.9001
+material = ExtResource( 3 )
+
+[node name="Floor3" type="CSGBox" parent="CSGCombiner2"]
+transform = Transform( 1, 0, 0, 0, -0.0191276, 1.91202, 0, -0.522817, -0.0191276, 9.67598, 1.78102, -3.14944 )
+width = 58.7758
+depth = 6.87971
+material = ExtResource( 4 )
+
+[node name="Label3D2" type="Spatial" parent="."]
+transform = Transform( 1.19249e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, -1.19249e-08, -5.21253e-16, -40.7967, -1.57097, 0.310352 )
+script = ExtResource( 8 )
+text = "there is no fall damage"
+text_size = 1.0
+font = null
+align = 2
+billboard = false
+color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+roughness = 0.52
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.0
+min_steps = 32
+max_steps = 256
+
+[node name="Label3D3" type="Spatial" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -13.6366, 4.10788, 13.5232 )
+script = ExtResource( 8 )
+text = "slide on walls by holding space
+and moving into them
+diagonally
+
+sprint to go further and release
+space to jump off"
+text_size = 1.0
+font = null
+align = 2
+billboard = true
+color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+roughness = 0.52
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.024
+min_steps = 32
+max_steps = 256

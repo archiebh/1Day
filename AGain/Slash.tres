@@ -1,0 +1,30 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "Slash"
+length = 0.18
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head/Camera/MeleeWeapon:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -1.772, -0.398, 3.807 ), Vector3( -51.925, 78.39, -38.176 ), Vector3( -1.772, -0.398, 3.807 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/Camera/MeleeWeapon:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.06, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.115, -0.118, -0.144 ), Vector3( -0.099, -0.118, -0.144 ), Vector3( 0.115, -0.118, -0.144 ) ]
+}
