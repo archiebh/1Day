@@ -6,19 +6,45 @@ var speed = 5
 onready var hitbox = $CSGCombiner/CSGBox/Area
 onready var water = get_node("/root/mainNode/lvl1/water")
 var stopped=false
-var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	random.randomize()
-	var xNum = random.randf_range(-12.5, 12.5)
-	var zNum = random.randf_range(-12.5, 12.5)
-	translation = Vector3(xNum, water.translation.y+40, zNum)
 	
-	var blockSize = random.randf_range(2, 8)
-	var width = random.randf_range(1, blockSize-0.4)
-	var height = blockSize - width
-	scale = Vector3(width, 1, height)
+	var xOff
+	var yOff
+	if get_node("/root/mainNode").blockInstance == 0:
+		xOff=0
+		yOff=0
+	elif get_node("/root/mainNode").blockInstance == 1:
+		xOff=25
+		yOff=0
+	elif get_node("/root/mainNode").blockInstance == 2:
+		xOff=-25
+		yOff=0
+	elif get_node("/root/mainNode").blockInstance == 3:
+		xOff=25
+		yOff=25
+	elif get_node("/root/mainNode").blockInstance == 4:
+		xOff=-25
+		yOff=25
+	elif get_node("/root/mainNode").blockInstance == 5:
+		xOff=25
+		yOff=-25
+	elif get_node("/root/mainNode").blockInstance == 6:
+		xOff=-25
+		yOff=-25
+	elif get_node("/root/mainNode").blockInstance == 7:
+		xOff=0
+		yOff=25
+	elif get_node("/root/mainNode").blockInstance == 8:
+		xOff=0
+		yOff=-25
+	
+	var xNum = get_node("/root/mainNode").globXnum
+	var zNum = get_node("/root/mainNode").globZnum
+	translation = Vector3(xNum+xOff, water.translation.y+40, zNum+yOff)
+
+	scale = Vector3(get_node("/root/mainNode").globWidth, 1, get_node("/root/mainNode").globHeight)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
