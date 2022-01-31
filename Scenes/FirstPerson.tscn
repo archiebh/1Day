@@ -87,7 +87,7 @@ anims/Flip = SubResource( 10 )
 anims/Stab = SubResource( 11 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.01
 
 [node name="PlayerHitbox" type="Area" parent="." groups=["player"]]
 
@@ -96,3 +96,4 @@ transform = Transform( 0.392, 0, 0, 0, 1, 0, 0, 0, 0.392, 0, 0.322, 0 )
 shape = SubResource( 12 )
 
 [connection signal="timeout" from="Timer" to="." method="StrikeTimeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
