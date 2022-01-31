@@ -8,3 +8,5 @@ process_priority = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
