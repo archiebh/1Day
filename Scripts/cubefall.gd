@@ -13,7 +13,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	translation -= Vector3(0, speed*delta, 0)
-	if len(hitbox.get_overlapping_areas()) > 0 and stopped == false:
-		speed = 0
-		stopped=true
+	#if len(hitbox.get_overlapping_areas()) > 0 and stopped == false:
+	for area in hitbox.get_overlapping_areas():
+		if not area.is_in_group("player"):
+			speed = 0
+			stopped=true
+		if area.is_in_group("culler"):
+			queue_free()
 

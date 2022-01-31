@@ -29,6 +29,7 @@ onready var jumpsound = $Head/jump
 onready var walksound = $Head/walk
 onready var sprintsound = $Head/sprint
 onready var slidesound = $Head/slide
+onready var upbox = $PlayerHitbox
 
 
 func _ready():
@@ -68,6 +69,8 @@ func _process(delta):
 		
 func _physics_process(delta):
 	#get keyboard input
+	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
+		translation -= Vector3(0, 2*delta, 0)
 	if is_on_floor() and is_on_ceiling():
 		print("dead")
 	if is_on_wall():
