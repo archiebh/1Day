@@ -2,13 +2,18 @@ extends Spatial
 
 
 # Declare member variables here. Examples:
-var speed = 2
+var speed = 5
 onready var hitbox = $CSGCombiner/CSGBox/Area
+onready var water = get_node("/root/mainNode/lvl1/water")
 var stopped=false
+var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	random.randomize()
+	var xNum = random.randf_range(-12.5, 12.5)
+	var zNum = random.randf_range(-12.5, 12.5)
+	translation = Vector3(xNum, water.translation.y+40, zNum)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

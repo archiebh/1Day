@@ -1,15 +1,15 @@
-extends CSGBox
+extends Spatial
 
 
-var speed = 0
-
-
+var blockSrc = preload("res://Scenes/cube.tscn")
+var timeb4 = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	translation = Vector3(0, speed*delta, 0) + translation
-	pass
+	timeb4+=delta
+	if timeb4 > 2:
+		timeb4=0
+		add_child(blockSrc.instance())
