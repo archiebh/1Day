@@ -68,6 +68,8 @@ func _process(delta):
 		
 func _physics_process(delta):
 	#get keyboard input
+	if is_on_floor() and is_on_ceiling():
+		print("dead")
 	if is_on_wall():
 		if Input.is_action_pressed("jump") and walljump ==1:
 			gravity = 3
