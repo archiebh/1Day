@@ -14,6 +14,12 @@ func _ready():
 	var xNum = random.randf_range(-12.5, 12.5)
 	var zNum = random.randf_range(-12.5, 12.5)
 	translation = Vector3(xNum, water.translation.y+40, zNum)
+	
+	var blockSize = random.randf_range(2, 8)
+	var width = random.randf_range(1, blockSize-0.4)
+	var height = blockSize - width
+	scale = Vector3(width, 1, height)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
