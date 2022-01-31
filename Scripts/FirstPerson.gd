@@ -23,7 +23,6 @@ var movement = Vector3()
 onready var head = $Head
 onready var camera = $Head/Camera
 onready var melee_anim = $AnimationPlayer
-onready var hitbox = $Head/Camera/Hitbox
 onready var slash = $Head/slash
 onready var cut = $Head/cut
 onready var jumpsound = $Head/jump
