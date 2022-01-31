@@ -47,6 +47,16 @@ func respawn():
 	if position.y < -50:
 		self.position = Vector3(0,0,50)
 
+func teleport():
+	if translation.x > 12.5:
+		translation = Vector3(translation.x-25, translation.y, translation.z)
+	if translation.x < -12.5:
+		translation = Vector3(translation.x+25, translation.y, translation.z)
+	if translation.z > 12.5:
+		translation = Vector3(translation.x, translation.y, translation.z-25)
+	if translation.z < -12.5:
+		translation = Vector3(translation.x, translation.y, translation.z+25)
+
 func block():
 	if Input.is_action_just_pressed("block") and not melee_anim.is_playing():
 		melee_anim.play("Block")
@@ -69,6 +79,7 @@ func _process(delta):
 		
 func _physics_process(delta):
 	#get keyboard input
+	teleport()
 	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
 		translation -= Vector3(0, 2*delta, 0)
 	if is_on_floor() and is_on_ceiling():
