@@ -46,7 +46,7 @@ func _input(event):
 func respawn():
 	if position.y < -50:
 		self.position = Vector3(0,0,50)
-
+#
 func teleport():
 	if translation.x > 12.5:
 		translation = Vector3(translation.x-25, translation.y, translation.z)
