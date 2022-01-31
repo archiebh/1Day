@@ -4,3 +4,5 @@
 
 [node name="SkeletonIK" type="SkeletonIK" parent="."]
 process_priority = 1
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
