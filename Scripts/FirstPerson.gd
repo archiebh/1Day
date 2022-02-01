@@ -1,13 +1,14 @@
 extends KinematicBody
 
 var speed = 5
-const ACCEL_DEFAULT = 7
-const ACCEL_AIR = 1
+const ACCEL_DEFAULT = 10
+const ACCEL_AIR = 10
 onready var accel = ACCEL_DEFAULT
-var gravity = 12
-var jump = 7
+var gravity = 25
+var jump = 13
 var walljump = 1
 var todo = 0
+const gravconst = 25
 
 var jumping
 var cam_accel = 40
@@ -82,15 +83,15 @@ func _process(delta):
 func _physics_process(delta):
 	#get keyboard input
 	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
-		translation -= Vector3(0, 5*delta, 0)
+		translation -= Vector3(0, 20*delta, 0)
 	if is_on_floor() and is_on_ceiling():
 		print("dead")
 	if is_on_wall():
 		if Input.is_action_pressed("jump") and walljump ==1:
-			gravity = 3
+			gravity = gravconst
 			jumping = 0
 	if not is_on_wall():
-		gravity = 9.8
+		gravity = gravconst
 		jumping = 1
 	if is_on_floor():
 		jumping = 1
