@@ -32,6 +32,8 @@ onready var sprintsound = $Head/sprint
 onready var slidesound = $Head/slide
 onready var upbox = $PlayerHitbox
 
+
+
 func _ready():
 	#hides the cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -49,21 +51,13 @@ func respawn():
 #
 func teleport():
 	if translation.x > 12.5:
-		set_physics_process(false)
 		translation = Vector3(-12.5, translation.y, translation.z)
-		set_physics_process(true)
 	if translation.x < -12.5:
-		set_physics_process(false)
 		translation = Vector3(12.5, translation.y, translation.z)
-		set_physics_process(true)
 	if translation.z > 12.5:
-		set_physics_process(false)
 		translation = Vector3(translation.x, translation.y,-12.5)
-		set_physics_process(true)
 	if translation.z < -12.5:
-		set_physics_process(false)
 		translation = Vector3(translation.x, translation.y, 12.5)
-		set_physics_process(true)
 
 func block():
 	if Input.is_action_just_pressed("block") and not melee_anim.is_playing():
