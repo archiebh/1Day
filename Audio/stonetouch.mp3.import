@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stonetouch.mp3-c21a4a9ebfcea2b666d2c1634d4b6894.mp3str"
+
+[deps]
+
+source_file="res://Audio/stonetouch.mp3"
+dest_files=[ "res://.import/stonetouch.mp3-c21a4a9ebfcea2b666d2c1634d4b6894.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/waterloop.wav-6f48d5ab3c7c6e0733d8e9819e3b8105.sample"
+
+[deps]
+
+source_file="res://Audio/waterloop.wav"
+dest_files=[ "res://.import/waterloop.wav-6f48d5ab3c7c6e0733d8e9819e3b8105.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

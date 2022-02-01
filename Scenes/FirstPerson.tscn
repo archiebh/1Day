@@ -1,6 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/FirstPerson.gd" type="Script" id=1]
+[ext_resource path="res://Audio/running.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Audio/jump.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Audio/walking.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Audio/waterloop.wav" type="AudioStream" id=5]
+[ext_resource path="res://Fonts/Akira Expanded Demo.otf" type="DynamicFontData" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -12,6 +17,16 @@ mid_height = 1.5
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 31
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=15]
+default_font = SubResource( 16 )
+Label/colors/font_color = Color( 1, 0, 0, 1 )
+Label/colors/font_color_shadow = Color( 0.298039, 0.0745098, 0.0745098, 0.392157 )
+Label/fonts/font = null
 
 [sub_resource type="Animation" id=8]
 resource_name = "Block"
@@ -61,20 +76,39 @@ visible = false
 position = Vector2( 803.887, 551.357 )
 scale = Vector2( 0.497224, 0.343867 )
 
+[node name="Label" type="Label" parent="Head/CanvasLayer"]
+margin_left = 561.0
+margin_top = 1.0
+margin_right = 635.0
+margin_bottom = 35.0
+theme = SubResource( 15 )
+text = "123"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="slash" type="AudioStreamPlayer2D" parent="Head"]
 position = Vector2( 289, 167 )
 
 [node name="cut" type="AudioStreamPlayer" parent="Head"]
 
 [node name="jump" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 3 )
 
 [node name="walk" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 4 )
 
 [node name="sprint" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 2 )
 
 [node name="slide" type="AudioStreamPlayer" parent="Head"]
 
 [node name="flip" type="AudioStreamPlayer" parent="Head"]
+
+[node name="water" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 5 )
 
 [node name="cros" type="Sprite" parent="."]
 visible = false

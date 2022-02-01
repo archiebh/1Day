@@ -1,5 +1,5 @@
 extends KinematicBody
-
+var height
 var speed = 8
 const ACCEL_DEFAULT = 10
 const ACCEL_AIR = 10
@@ -9,7 +9,7 @@ var jump = 13
 var walljump = 1
 var todo = 0
 const gravconst = 25
-
+var score = 0
 var jumping
 var cam_accel = 40
 var mouse_sense = 0.1
@@ -32,11 +32,13 @@ onready var walksound = $Head/walk
 onready var sprintsound = $Head/sprint
 onready var slidesound = $Head/slide
 onready var upbox = $PlayerHitbox
-
-
+onready var water = $Head/water
+onready var waterblock = get_node("/root/mainNode/lvl1/water")
+onready var scorelabel = $Head/CanvasLayer/Label
 
 func _ready():
 	#hides the cursor
+	water.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
@@ -49,7 +51,13 @@ func _input(event):
 func respawn():
 	if position.y < -50:
 		self.position = Vector3(0,0,50)
-#
+
+func setscore():
+	height = translation.y
+	if height > score:
+		score = height
+	scorelabel.text = str(int(round(score))-2)
+
 func teleport():
 	if translation.x > 12.5:
 		translation = Vector3(-12.5, translation.y, translation.z)
@@ -70,6 +78,8 @@ func block():
 
 func _process(delta):
 	teleport()
+	setscore()
+	water.volume_db = 4-(translation.y - waterblock.translation.y)
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors
 	if Engine.get_frames_per_second() > Engine.iterations_per_second:
 		camera.set_as_toplevel(true)
@@ -82,6 +92,7 @@ func _process(delta):
 		
 func _physics_process(delta):
 	#get keyboard input
+	
 	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
 		translation -= Vector3(0, 20*delta, 0)
 	if is_on_floor() and is_on_ceiling():
@@ -121,7 +132,7 @@ func _physics_process(delta):
 		gravity_vec = Vector3.UP * jump
 		walljump = 1
 		jumpsound.play()
-	if Input.is_action_just_released("jump") and is_on_wall() and walljump == 1:
+	if Input.is_action_just_pressed("jump") and is_on_wall() and walljump == 1:
 		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
 		walljump = 0
