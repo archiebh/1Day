@@ -6,7 +6,7 @@ var speed = 20
 onready var hitbox = $CSGCombiner/CSGBox/Area
 onready var water = get_node("/root/mainNode/lvl1/water")
 var stopped=false
-
+onready var csg = $CSGCombiner
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -55,6 +55,7 @@ func _process(delta):
 		if not area.is_in_group("player"):
 			speed = 0
 			stopped=true
+			csg.cast_shadow = false
 		if area.is_in_group("culler"):
 			queue_free()
 
