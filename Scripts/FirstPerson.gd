@@ -1,6 +1,6 @@
 extends KinematicBody
 
-var speed = 5
+var speed = 8
 const ACCEL_DEFAULT = 10
 const ACCEL_AIR = 10
 onready var accel = ACCEL_DEFAULT
@@ -100,11 +100,10 @@ func _physics_process(delta):
 	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 	var h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	direction = Vector3(h_input, 0, f_input).rotated(Vector3.UP, h_rot).normalized()
-	if is_on_floor() or is_on_wall():
-		if Input.is_action_pressed("sprint"):
-			speed = 25
+	if Input.is_action_pressed("sprint"):
+		speed = 17
 	if Input.is_action_just_released("sprint"):
-		speed = 5
+		speed = 8
 	#jumping and gravity
 	if Input.is_action_pressed("sprint"):
 		melee_damage = 5
