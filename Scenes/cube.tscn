@@ -21,7 +21,7 @@ height = 4.0
 depth = 4.0
 material = SubResource( 2 )
 
-[node name="Area" type="Area" parent="CSGCombiner/CSGBox"]
+[node name="Area" type="Area" parent="CSGCombiner/CSGBox" groups=["blocks"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="CSGCombiner/CSGBox/Area"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )

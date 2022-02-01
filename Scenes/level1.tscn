@@ -38,7 +38,7 @@ width = 25.0
 height = 0.5
 depth = 25.0
 
-[node name="Area" type="Area" parent="floor/CSGBox"]
+[node name="Area" type="Area" parent="floor/CSGBox" groups=["blocks"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="floor/CSGBox/Area"]
 transform = Transform( 12.5, 0, 0, 0, 0.25, 0, 0, 0, 12.5, 0, 0, 0 )

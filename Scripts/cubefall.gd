@@ -63,7 +63,7 @@ func _process(delta):
 	if len(hitbox.get_overlapping_areas()) > 0 and stopped == false:
 		var yPos=translation.y
 		for area in hitbox.get_overlapping_areas():
-			if not area.is_in_group("player"):
+			if area.is_in_group("blocks"):
 				stopped=true
 				speed=0
 				translation = Vector3(translation.x, nearestFive(yPos), translation.z)
