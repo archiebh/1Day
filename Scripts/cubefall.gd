@@ -42,7 +42,7 @@ func _ready():
 	
 	var xNum = get_node("/root/mainNode").globXnum
 	var zNum = get_node("/root/mainNode").globZnum
-	translation = Vector3(xNum+xOff, water.translation.y+40, zNum+yOff)
+	translation = Vector3(xNum+xOff, get_node("/root/mainNode").globMostHeight+40, zNum+yOff)
 
 	scale = Vector3(get_node("/root/mainNode").globWidth, 1, get_node("/root/mainNode").globHeight)
 	
@@ -57,6 +57,8 @@ func _process(delta):
 				speed = 0
 				stopped=true
 				csg.cast_shadow = false
+				if translation.y > get_node("/root/mainNode").globMostHeight:
+					get_node("/root/mainNode").globMostHeight = translation.y
 	if len(hitbox.get_overlapping_areas()) > 0 and stopped == true:
 		for area in hitbox.get_overlapping_areas():
 			if area.is_in_group("culler"):

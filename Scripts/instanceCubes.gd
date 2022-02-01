@@ -5,6 +5,8 @@ var blockSrc = preload("res://Scenes/cube.tscn")
 var timeb4 = 0
 var blockInstance=0
 
+var globMostHeight=0
+
 var globXnum =0
 var globZnum =0
 var globBlockSize =0
