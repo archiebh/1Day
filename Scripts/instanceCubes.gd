@@ -19,7 +19,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	timeb4+=delta
-	if timeb4 > 2:
+	if timeb4 > 0.5:
 		random.randomize()
 		globXnum = random.randf_range(-11, 11)
 		globZnum = random.randf_range(-11, 11)

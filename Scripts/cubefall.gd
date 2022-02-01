@@ -2,7 +2,7 @@ extends Spatial
 
 
 # Declare member variables here. Examples:
-var speed = 5
+var speed = 20
 onready var hitbox = $CSGCombiner/CSGBox/Area
 onready var water = get_node("/root/mainNode/lvl1/water")
 var stopped=false
