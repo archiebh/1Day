@@ -21,10 +21,10 @@ func _process(delta):
 	timeb4+=delta
 	if timeb4 > 2:
 		random.randomize()
-		globXnum = random.randf_range(-12.5, 12.5)
-		globZnum = random.randf_range(-12.5, 12.5)
-		globBlockSize = random.randf_range(2, 8)
-		globWidth = random.randf_range(1, globBlockSize-0.4)
+		globXnum = random.randf_range(-12, 12)
+		globZnum = random.randf_range(-12, 12)
+		globBlockSize = random.randf_range(1, 4)
+		globWidth = random.randf_range(0.5, globBlockSize-0.2)
 		globHeight = globBlockSize - globWidth
 		add_child(blockSrc.instance())
 		blockInstance+=1
