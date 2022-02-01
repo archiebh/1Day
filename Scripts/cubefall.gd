@@ -6,9 +6,14 @@ var speed = 20
 onready var audio = $AudioStreamPlayer3D
 onready var hitbox = $CSGCombiner/CSGBox/Area
 onready var water = get_node("/root/mainNode/lvl1/water")
+var fallKeep=false
 var stopped=false
 onready var csg = $CSGCombiner
 # Called when the node enters the scene tree for the first time.
+
+func nearestFive(num):
+	return 2.25 + (floor((num+2)/4)*4)
+
 func _ready():
 	
 	var xOff
@@ -50,14 +55,19 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	translation -= Vector3(0, speed*delta, 0)
+	if get_node("/root/mainNode").globFallStart and stopped==false:
+		translation -= Vector3(0, speed*delta, 0)
+		fallKeep=true
+	if fallKeep and stopped==false:
+		translation -= Vector3(0, speed*delta, 0)
 	if len(hitbox.get_overlapping_areas()) > 0 and stopped == false:
+		var yPos=translation.y
 		for area in hitbox.get_overlapping_areas():
 			if not area.is_in_group("player"):
-				translation += Vector3(0, speed*delta*2, 0)
-				speed = 0
-				audio.play()
 				stopped=true
+				speed=0
+				translation = Vector3(translation.x, nearestFive(yPos), translation.z)
+				audio.play()
 				csg.cast_shadow = false
 				if translation.y > get_node("/root/mainNode").globMostHeight:
 					get_node("/root/mainNode").globMostHeight = translation.y

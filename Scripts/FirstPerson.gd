@@ -4,11 +4,11 @@ var speed = 8
 const ACCEL_DEFAULT = 10
 const ACCEL_AIR = 10
 onready var accel = ACCEL_DEFAULT
-var gravity = 25
-var jump = 13
+var gravity = 30
+var jump = 16
 var walljump = 1
 var todo = 0
-const gravconst = 25
+const gravconst = 30
 var score = 0
 var jumping
 var cam_accel = 40

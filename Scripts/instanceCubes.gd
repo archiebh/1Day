@@ -7,6 +7,8 @@ var blockInstance=0
 
 var globMostHeight=0
 
+var globFallStart=false
+
 var globXnum =0
 var globZnum =0
 var globBlockSize =0
@@ -22,6 +24,7 @@ func _ready():
 func _process(delta):
 	timeb4+=delta
 	if timeb4 > 0.5:
+		globFallStart=false
 		random.randomize()
 		globXnum = random.randf_range(-11, 11)
 		globZnum = random.randf_range(-11, 11)
@@ -46,4 +49,5 @@ func _process(delta):
 		blockInstance+=1
 		add_child(blockSrc.instance())
 		blockInstance=0
+		globFallStart=true
 		timeb4=0
