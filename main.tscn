@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/level1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/FirstPerson.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/instanceCubes.gd" type="Script" id=3]
+[ext_resource path="res://pixel.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/instanceCubes.gd" type="Script" id=4]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -16,7 +17,7 @@ fog_depth_end = 30.5
 fog_depth_curve = 0.840897
 
 [node name="mainNode" type="Spatial"]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="FirstPerson" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -25,3 +26,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="Pixellate" type="Viewport" parent="."]
+script = ExtResource( 3 )
