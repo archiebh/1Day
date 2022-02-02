@@ -68,3 +68,5 @@ __meta__ = {
 }
 
 [node name="lvl1" parent="." instance=ExtResource( 1 )]
+
+[connection signal="pressed" from="Camera/CanvasLayer/Play" to="." method="_on_Play_pressed"]

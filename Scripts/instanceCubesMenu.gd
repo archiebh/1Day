@@ -50,3 +50,8 @@ func _process(delta):
 			hierPass+=6
 			
 		timeb4=0
+
+
+func _on_Play_pressed():
+	get_tree().change_scene("res://main.tscn")
+	pass # Replace with function body.

@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="1Day"
-run/main_scene="res://main.tscn"
+run/main_scene="res://mainmenu.tscn"
 config/icon="res://icon.png"
 
 [display]
