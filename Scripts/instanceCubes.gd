@@ -26,6 +26,45 @@ func _ready():
 	Engine.target_fps = 60
 	pass
 
+
+func isTooNear(w, h, xN, yN):
+	var bottom = false
+	var top = false
+	var left = false
+	var right = false
+	var aS = pow((w/2), 2)
+	var bS = pow((h/2), 2)
+	var v = sqrt ( aS + bS )
+	var toMove=0
+	var rep = Vector3(0, 0, 0)
+	if xN - v < -25:
+		left = true
+	if xN + v > 25:
+		right = true
+	if yN - v < -25:
+		bottom = true
+	if yN + v > 25:
+		top = true
+	if left:
+		toMove = v-(xN--25)
+		rep+=Vector3(toMove, 0, 0)
+	if right:
+		toMove = v-(25-xN)
+		rep+= Vector3(-toMove, 0, 0)
+	if bottom:
+		toMove = v-(yN--25)
+		rep+=Vector3(0, 0, toMove)
+	if top:
+		toMove = v-(25-yN)
+		rep+= Vector3(0, 0, -toMove) 
+	
+	return rep
+	
+func getWorst(w, h):
+	var aS = pow((w/2), 2)
+	var bS = pow((h/2), 2)
+	var v = sqrt ( aS + bS )
+	return v
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
@@ -36,12 +75,13 @@ func _process(delta):
 		globWaveCount=0
 		hierPass=0
 		for i in range(6):
-			globXnum = random.randf_range(-24, 24)
-			globZnum = random.randf_range(-24, 24)
-			globRot = random.randf_range(0, 2*PI)
 			globBlockSize = random.randf_range(1, 5)
 			globWidth = random.randf_range(0.5, globBlockSize-0.2)
 			globHeight = globBlockSize - globWidth
+			globRot = random.randf_range(0, 2*PI)
+			var safetyMeasure = getWorst(globWidth, globHeight)
+			globXnum = random.randf_range(-24+safetyMeasure, 24-safetyMeasure)
+			globZnum = random.randf_range(-24+safetyMeasure, 24-safetyMeasure)
 			add_child(blockSrc.instance())
 			hierPass+=1
 			

@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/level1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/FirstPerson.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/pixel.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/instanceCubes.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/culledge.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/edgeMover.gd" type="Script" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -31,7 +29,3 @@ environment = SubResource( 1 )
 
 [node name="Pixellate" type="Viewport" parent="."]
 script = ExtResource( 3 )
-
-[node name="CullEdge" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0 )
-script = ExtResource( 6 )

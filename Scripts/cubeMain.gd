@@ -53,8 +53,6 @@ func _process(delta):
 	if len(hitbox.get_overlapping_areas()) > 0 and stopped == false and begin:
 		var yPos=translation.y
 		for area in hitbox.get_overlapping_areas():
-			if area.is_in_group("edge"):
-				queue_free()
 			if area.is_in_group("blocks"):
 				if yPos-4 > get_node("/root/mainNode").globMostHeight:
 					if hier < area.get_parent().get_parent().get_parent().hier:
