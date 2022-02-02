@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/level1menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/instanceCubesMenu.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/pixel.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/theme.tres" type="Theme" id=4]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.57
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 0.937255, 0.937255, 0.937255, 1 )
+fog_depth_begin = 5.6
+fog_depth_end = 30.5
+fog_depth_curve = 0.840897
+
+[node name="mainNode" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Pixellate" type="Viewport" parent="."]
+script = ExtResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.029, 6, 16.201 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+follow_viewport_enable = true
+
+[node name="Play" type="Button" parent="Camera/CanvasLayer"]
+margin_left = 15.0
+margin_top = 225.0
+margin_right = 138.0
+margin_bottom = 265.0
+theme = ExtResource( 4 )
+text = "play"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Button" parent="Camera/CanvasLayer"]
+margin_left = 14.0
+margin_top = 266.0
+margin_right = 241.0
+margin_bottom = 306.0
+theme = ExtResource( 4 )
+text = "settings"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="Camera/CanvasLayer"]
+margin_left = 8.0
+margin_top = 305.0
+margin_right = 131.0
+margin_bottom = 345.0
+theme = ExtResource( 4 )
+text = "exit"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lvl1" parent="." instance=ExtResource( 1 )]
+
+[connection signal="pressed" from="Camera/CanvasLayer/Play" to="." method="_on_Play_pressed"]
