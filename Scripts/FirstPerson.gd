@@ -126,11 +126,13 @@ func _process(delta):
 		camera.set_as_toplevel(false)
 		camera.global_transform = head.global_transform
 	if dead == 1:
-		translation.y = waterblock.translation.y + 5
 		set_physics_process(false)
 		jumpsound.stop()
 		walksound.stop()
 		sprintsound.stop()
+		if waterblock.translation.y > 0:
+			translation.y = waterblock.translation.y + 5
+
 
 func _physics_process(delta):
 	#get keyboard input
