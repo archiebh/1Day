@@ -96,13 +96,13 @@ func loadhighscore():
 func kill():
 	if translation.y - waterblock.translation.y < -1 and dead == 0:
 		savehighscore()
-		deathlabel.text = "Drowned!\nScore: "+str(int(round(score))-2)+"\nHigh Score: "+str(int(round(highscore)))+"\n\nClick to restart"
+		deathlabel.text = "Drowned!\nScore : "+str(int(round(score))-2)+"\nHigh Score : "+str(int(round(highscore)))+"\n\nClick to restart"
 		deathlabel.visible = true
 		scorelabel.visible = false
 		dead = 1
 	if squashed == 1 and dead == 0:
 		savehighscore()
-		deathlabel.text = "Crushed!\nScore: "+str(int(round(score))-2)+"\nHigh Score: "+str(int(round(highscore)))+"\n\nClick to restart"
+		deathlabel.text = "Crushed!\nScore : "+str(int(round(score))-2)+"\nHigh Score : "+str(int(round(highscore)))+"\n\nClick to restart"
 		deathlabel.visible = true
 		scorelabel.visible = false
 		dead = 1
