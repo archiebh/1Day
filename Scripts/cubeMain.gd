@@ -53,6 +53,8 @@ func _process(delta):
 	if len(hitbox.get_overlapping_areas()) > 0 and stopped == false and begin:
 		var yPos=translation.y
 		for area in hitbox.get_overlapping_areas():
+			if area.is_in_group("edge"):
+				queue_free()
 			if area.is_in_group("blocks"):
 				if yPos-4 > get_node("/root/mainNode").globMostHeight:
 					if hier < area.get_parent().get_parent().get_parent().hier:
@@ -65,5 +67,14 @@ func _process(delta):
 					csg.cast_shadow = false
 					if translation.y > get_node("/root/mainNode").globMostHeight:
 						get_node("/root/mainNode").globMostHeight = translation.y
+			if area.is_in_group("blocks2"):
+				stopped=true
+				speed=0
+				translation = Vector3(translation.x, nearestFive(yPos), translation.z)
+				audio.play()
+				csg.cast_shadow = false
+				if translation.y > get_node("/root/mainNode").globMostHeight:
+					get_node("/root/mainNode").globMostHeight = translation.y
+				
 	if translation.y+10 < water.translation.y:
 		queue_free()

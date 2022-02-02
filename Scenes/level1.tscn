@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/waterrise.gd" type="Script" id=1]
 [ext_resource path="res://Materials/frame_0_delay-0.25s.png" type="Texture" id=2]
@@ -23,6 +23,8 @@ frame_3/delay_sec = 0.0
 flags_world_triplanar = true
 albedo_texture = SubResource( 3 )
 uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=5]
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
@@ -58,3 +60,22 @@ transform = Transform( 0.333333, 0, 0, 0, 3.97496e-09, 1, 0, -0.333333, 1.32499e
 light_energy = 0.418
 shadow_enabled = true
 shadow_color = Color( 1, 0, 0, 1 )
+
+[node name="Area" type="Area" parent="water"]
+transform = Transform( 0.333333, 0, 0, 0, 1, 0, 0, 0, 0.333333, 0, 17, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="water/Area"]
+transform = Transform( 0.05, 0, 0, 0, 10, 0, 0, 0, 12.5, -12.5, 40, 0 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="water/Area"]
+transform = Transform( 0.05, 0, 0, 0, 10, 0, 0, 0, 12.5, 12.5, 40, 0 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="water/Area"]
+transform = Transform( -2.18557e-09, 0, 12.5, 0, 10, 0, -0.05, 0, -5.46392e-07, 0, 40, 12.5 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="water/Area"]
+transform = Transform( -2.18557e-09, 0, 12.5, 0, 10, 0, -0.05, 0, -5.46392e-07, 0, 40, -12.5 )
+shape = SubResource( 5 )
