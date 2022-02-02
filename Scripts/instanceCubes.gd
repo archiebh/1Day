@@ -2,8 +2,9 @@ extends Spatial
 
 
 var blockSrc = preload("res://Scenes/cube.tscn")
+var blockCopySrc = preload("res://Scenes/cubeCopy.tscn")
 var timeb4 = 0
-var blockInstance=0
+var globBlockInstance=0
 
 var globMostHeight=0
 
@@ -32,22 +33,4 @@ func _process(delta):
 		globWidth = random.randf_range(0.5, globBlockSize-0.2)
 		globHeight = globBlockSize - globWidth
 		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance+=1
-		add_child(blockSrc.instance())
-		blockInstance=0
-		globFallStart=true
 		timeb4=0
