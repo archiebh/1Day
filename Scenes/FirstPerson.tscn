@@ -1,11 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/FirstPerson.gd" type="Script" id=1]
 [ext_resource path="res://Audio/running.mp3" type="AudioStream" id=2]
 [ext_resource path="res://Audio/jump.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Audio/walking.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Audio/waterloop.wav" type="AudioStream" id=5]
-[ext_resource path="res://Fonts/Akira Expanded Demo.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/font.tres" type="DynamicFont" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -18,12 +18,8 @@ mid_height = 1.5
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="DynamicFont" id=16]
-size = 31
-font_data = ExtResource( 6 )
-
 [sub_resource type="Theme" id=15]
-default_font = SubResource( 16 )
+default_font = ExtResource( 6 )
 Label/colors/font_color = Color( 1, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0.298039, 0.0745098, 0.0745098, 0.392157 )
 Label/fonts/font = null
@@ -65,6 +61,7 @@ material/0 = SubResource( 13 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09216, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
+current = true
 fov = 101.9
 far = 30.0
 
@@ -86,7 +83,7 @@ text = "123"
 align = 2
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Label2" type="Label" parent="Head/CanvasLayer"]

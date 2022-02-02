@@ -1,31 +1,82 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Materials/stone.tres" type="Theme" id=1]
-[ext_resource path="res://Scripts/Menu.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/pixel.gd" type="Script" id=1]
+[ext_resource path="res://Materials/frame_0_delay-0.25s.png" type="Texture" id=2]
+[ext_resource path="res://Materials/frame_1_delay-0.25s.png" type="Texture" id=3]
+[ext_resource path="res://Materials/frame_3_delay-0.25s.png" type="Texture" id=4]
+[ext_resource path="res://Materials/frame_2_delay-0.25s.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/waterrisemenu.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/instanceCubesMenu.gd" type="Script" id=7]
 
+[sub_resource type="Environment" id=1]
+background_mode = 1
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.57
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 0.937255, 0.937255, 0.937255, 1 )
+fog_depth_begin = 5.6
+fog_depth_end = 30.5
+fog_depth_curve = 0.840897
 
-[node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[sub_resource type="BoxShape" id=4]
 
-[node name="Button" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -80.0001
-margin_top = -23.0
-margin_right = -33.0001
-margin_bottom = -3.0
-rect_scale = Vector2( 3.378, 2.53 )
-theme = ExtResource( 1 )
-text = "PLAY!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[sub_resource type="AnimatedTexture" id=3]
+flags = 23
+frames = 4
+frame_0/texture = ExtResource( 2 )
+frame_1/texture = ExtResource( 3 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 5 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 4 )
+frame_3/delay_sec = 0.0
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[sub_resource type="SpatialMaterial" id=5]
+flags_world_triplanar = true
+albedo_texture = SubResource( 3 )
+uv1_triplanar = true
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 7 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 7 )
+
+[node name="Pixellate" type="Viewport" parent="."]
+script = ExtResource( 1 )
+
+[node name="floor" type="CSGCombiner" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0 )
+cast_shadow = 0
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="floor"]
+width = 25.0
+height = 0.5
+depth = 25.0
+
+[node name="Area" type="Area" parent="floor/CSGBox" groups=["blocks"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="floor/CSGBox/Area"]
+transform = Transform( 12.5, 0, 0, 0, 0.25, 0, 0, 0, 12.5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="water" type="CSGBox" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, -2, 0 )
+width = 25.0
+height = 0.1
+depth = 25.0
+material = SubResource( 5 )
+script = ExtResource( 6 )
+
+[node name="Timer" type="Timer" parent="water"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="water"]
+transform = Transform( 0.333333, 0, 0, 0, 3.97496e-09, 1, 0, -0.333333, 1.32499e-09, 0, 570, 0 )
+light_energy = 0.418
+shadow_enabled = true
+shadow_color = Color( 1, 0, 0, 1 )
