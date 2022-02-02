@@ -10,9 +10,11 @@ var walljump = 1
 var todo = 0
 const gravconst = 30
 var score = 0
+var highscore = 0
+const SAVE_FILE_PATH = "user://savedata.save"
 var jumping
 var cam_accel = 40
-var mouse_sense = 0.1
+var mouse_sense = 0.2
 var snap
 var melee_damage = 5
 var blocking = 0
@@ -22,6 +24,8 @@ var direction = Vector3()
 var velocity = Vector3()
 var gravity_vec = Vector3()
 var movement = Vector3()
+var dead = 0
+var squashed = 0
 onready var head = $Head
 onready var camera = $Head/Camera
 onready var melee_anim = $AnimationPlayer
@@ -35,9 +39,11 @@ onready var upbox = $PlayerHitbox
 onready var water = $Head/water
 onready var waterblock = get_node("/root/mainNode/lvl1/water")
 onready var scorelabel = $Head/CanvasLayer/Label
+onready var deathlabel = $Head/CanvasLayer/Label2
 
 func _ready():
 	#hides the cursor
+	loadhighscore()
 	water.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -48,15 +54,13 @@ func _input(event):
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sense))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
 
-func respawn():
-	if position.y < -50:
-		self.position = Vector3(0,0,50)
-
 func setscore():
 	height = translation.y
-	if height > score:
+	if height > score and dead == 0:
 		score = height
 	scorelabel.text = str(int(round(score))-2)
+	if highscore < score:
+		highscore = score-2
 
 func teleport():
 	if translation.x > 25:
@@ -76,9 +80,41 @@ func block():
 		blocking = 0
 		melee_anim.play("BlockRelease")
 
+func savehighscore():
+	var save_data = File.new()
+	save_data.open(SAVE_FILE_PATH, File.WRITE)
+	save_data.store_var(highscore)
+	save_data.close()
+
+func loadhighscore():
+	var save_data = File.new()
+	if save_data.file_exists(SAVE_FILE_PATH):
+		save_data.open(SAVE_FILE_PATH, File.READ)
+		highscore = save_data.get_var()
+		save_data.close()
+
+func kill():
+	if translation.y - waterblock.translation.y < -1 and dead == 0:
+		savehighscore()
+		deathlabel.text = "Drowned!\nScore: "+str(int(round(score))-2)+"\nHigh Score: "+str(int(round(highscore)))+"\n\nClick to restart"
+		deathlabel.visible = true
+		scorelabel.visible = false
+		dead = 1
+	if squashed == 1 and dead == 0:
+		savehighscore()
+		deathlabel.text = "Crushed!\nScore: "+str(int(round(score))-2)+"\nHigh Score: "+str(int(round(highscore)))+"\n\nClick to restart"
+		deathlabel.visible = true
+		scorelabel.visible = false
+		dead = 1
+func restart():
+	get_tree().reload_current_scene()
+
 func _process(delta):
+	kill()
 	teleport()
 	setscore()
+	if dead == 1 and Input.is_action_pressed("leftclick"):
+		restart()
 	water.volume_db = 4-(translation.y - waterblock.translation.y)
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors
 	if Engine.get_frames_per_second() > Engine.iterations_per_second:
@@ -89,14 +125,21 @@ func _process(delta):
 	else:
 		camera.set_as_toplevel(false)
 		camera.global_transform = head.global_transform
-		
+	if dead == 1:
+		translation.y = waterblock.translation.y + 5
+		set_physics_process(false)
+		jumpsound.stop()
+		walksound.stop()
+		sprintsound.stop()
+
 func _physics_process(delta):
 	#get keyboard input
 	
 	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
 		translation -= Vector3(0, 20*delta, 0)
+		gravity_vec = Vector3.DOWN
 	if is_on_floor() and is_on_ceiling():
-		print("dead")
+		squashed = 1
 	if is_on_wall():
 		if Input.is_action_pressed("jump") and walljump ==1:
 			gravity = gravconst

@@ -89,6 +89,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label2" type="Label" parent="Head/CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 15 )
+text = "Drowned!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="slash" type="AudioStreamPlayer2D" parent="Head"]
 position = Vector2( 289, 167 )
 
