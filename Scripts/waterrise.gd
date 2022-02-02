@@ -4,6 +4,10 @@ extends CSGBox
 var speed = 1.5
 
 
+func getSpeedIdeal():
+	return (get_node("/root/mainNode").globMostHeight-translation.y)/5
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -11,5 +15,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	translation = Vector3(0, speed*delta, 0) + translation
+	translation = Vector3(0, getSpeedIdeal()*delta, 0) + translation
 	pass

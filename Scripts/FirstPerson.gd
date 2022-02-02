@@ -59,14 +59,14 @@ func setscore():
 	scorelabel.text = str(int(round(score))-2)
 
 func teleport():
-	if translation.x > 12.5:
-		translation = Vector3(-12.5, translation.y, translation.z)
-	if translation.x < -12.5:
-		translation = Vector3(12.5, translation.y, translation.z)
-	if translation.z > 12.5:
-		translation = Vector3(translation.x, translation.y,-12.5)
-	if translation.z < -12.5:
-		translation = Vector3(translation.x, translation.y, 12.5)
+	if translation.x > 25:
+		translation = Vector3(-25, translation.y, translation.z)
+	if translation.x < -25:
+		translation = Vector3(25, translation.y, translation.z)
+	if translation.z > 25:
+		translation = Vector3(translation.x, translation.y,-25)
+	if translation.z < -25:
+		translation = Vector3(translation.x, translation.y, 25)
 
 func block():
 	if Input.is_action_just_pressed("block") and not melee_anim.is_playing():
