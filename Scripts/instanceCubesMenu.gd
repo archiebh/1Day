@@ -33,11 +33,11 @@ func _ready():
 	pass
 
 func camera():
-	camera.translation.y = waterblock.translation.y + 35
+	camera.translation.y = waterblock.translation.y + 22
 	
 func _process(delta):
 	camera()
-	
+	camera.fov = global.fov
 	timeb4+=delta
 	if timeb4 > 0.5:
 		globFallStart=false
@@ -64,29 +64,27 @@ func _on_Play_pressed():
 
 func _on_fovslider_value_changed(value):
 	global.fov = value
-	camera.fov = global.fov
 	pass # Replace with function body.
 
 
 func _on_musicslider_value_changed(value):
-	if value > 20:
+	if value > 50:
 		musicvol = value
 		global.music = -80 + musicvol
 		music.volume_db = global.music
 	else:
-		musicvol = -100
+		musicvol = -1000
 		global.music = -80 + musicvol
 		music.volume_db = global.music
 	pass # Replace with function body.
 
 
 func _on_sfxslider_value_changed(value):
-	if value > 50:
+	if value > 65:
 		soundvol = value
 		global.sound = -80 + soundvol
 	else:
-		musicvol = 0
-		soundvol = 0
+		soundvol = -1000
 		global.sound = -80 + soundvol
 	pass # Replace with function body.
 
