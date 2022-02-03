@@ -23,7 +23,6 @@ func _ready():
 	translation = Vector3(xNum, get_node("/root/mainNode").globMostHeight+40, zNum)
 	scale = Vector3(get_node("/root/mainNode").globWidth, 1, get_node("/root/mainNode").globHeight)
 	rotation = Vector3(0, rotNum, 0)
-	
 	get_node("/root/mainNode").globBlockInstance=0
 	add_child(get_node("/root/mainNode").blockCopySrc.instance())
 	get_node("/root/mainNode").globBlockInstance += 1
@@ -46,6 +45,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	audio.unit_db = global.sound
 	if get_node("/root/mainNode").globWaveCount > 5:
 		begin = true
 	if stopped==false:

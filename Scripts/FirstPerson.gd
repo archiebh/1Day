@@ -43,6 +43,7 @@ onready var deathlabel = $Head/CanvasLayer/Label2
 
 func _ready():
 	#hides the cursor
+	camera.fov = global.fov
 	loadhighscore()
 	water.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

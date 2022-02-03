@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/level1menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/instanceCubesMenu.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/pixel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/theme.tres" type="Theme" id=4]
+[ext_resource path="res://Audio/mainmenu demo.mp3" type="AudioStream" id=5]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -29,10 +30,12 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.029, 6, 16.201 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+offset = Vector2( 0.551, 110 )
+scale = Vector2( 0.7, 0.7 )
+transform = Transform2D( 0.7, 0, 0, 0.7, 0.551, 110 )
 follow_viewport_enable = true
 
 [node name="Main" type="Control" parent="Camera/CanvasLayer"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -82,6 +85,7 @@ __meta__ = {
 }
 
 [node name="Settings" type="Control" parent="Camera/CanvasLayer"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -109,6 +113,9 @@ margin_top = -10.0
 margin_right = 260.0
 margin_bottom = 6.0
 theme = ExtResource( 4 )
+min_value = 20.0
+max_value = 80.0
+value = 80.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,7 +142,7 @@ margin_right = 258.0
 margin_bottom = 6.0
 theme = ExtResource( 4 )
 min_value = 50.0
-value = 50.0
+value = 75.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,6 +168,9 @@ margin_top = -10.0
 margin_right = 260.0
 margin_bottom = 6.0
 theme = ExtResource( 4 )
+min_value = 50.0
+max_value = 80.0
+value = 80.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -197,7 +207,14 @@ __meta__ = {
 
 [node name="lvl1" parent="." instance=ExtResource( 1 )]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
 [connection signal="pressed" from="Camera/CanvasLayer/Main/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/Main/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/Main/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="value_changed" from="Camera/CanvasLayer/Settings/music/musicslider" to="." method="_on_musicslider_value_changed"]
 [connection signal="value_changed" from="Camera/CanvasLayer/Settings/fov2/fovslider" to="." method="_on_fovslider_value_changed"]
 [connection signal="value_changed" from="Camera/CanvasLayer/Settings/sfx/sfxslider" to="." method="_on_sfxslider_value_changed"]
+[connection signal="pressed" from="Camera/CanvasLayer/Settings/Back" to="." method="_on_Back_pressed"]

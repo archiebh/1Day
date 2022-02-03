@@ -14,6 +14,9 @@ var hierPass
 var globMostHeight=0
 
 var globFallStart=false
+onready var main = $Camera/CanvasLayer/Main
+onready var settings = $Camera/CanvasLayer/Settings
+onready var music = $AudioStreamPlayer
 onready var camera = $Camera
 onready var waterblock = get_node("lvl1/water")
 onready var block = get_node("lvl1/floor/CSGBox")
@@ -34,6 +37,7 @@ func camera():
 	
 func _process(delta):
 	camera()
+	
 	timeb4+=delta
 	if timeb4 > 0.5:
 		globFallStart=false
@@ -59,15 +63,46 @@ func _on_Play_pressed():
 
 
 func _on_fovslider_value_changed(value):
-	camera.fov = value
+	global.fov = value
+	camera.fov = global.fov
 	pass # Replace with function body.
 
 
 func _on_musicslider_value_changed(value):
-	musicvol = value
+	if value > 20:
+		musicvol = value
+		global.music = -80 + musicvol
+		music.volume_db = global.music
+	else:
+		musicvol = -100
+		global.music = -80 + musicvol
+		music.volume_db = global.music
 	pass # Replace with function body.
 
 
 func _on_sfxslider_value_changed(value):
-	soundvol = value
+	if value > 50:
+		soundvol = value
+		global.sound = -80 + soundvol
+	else:
+		musicvol = 0
+		soundvol = 0
+		global.sound = -80 + soundvol
 	pass # Replace with function body.
+
+
+func _on_Back_pressed():
+	settings.visible = false
+	main.visible = true
+	
+	pass # Replace with function body.
+
+
+func _on_Settings_pressed():
+	settings.visible = true
+	main.visible = false
+	pass # Replace with function body.
+
+
+func _on_Exit_pressed():
+	get_tree().quit()

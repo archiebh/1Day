@@ -25,7 +25,7 @@ var random = RandomNumberGenerator.new()
 func _ready():
 	Engine.target_fps = 60
 	pass
-
+var pause = 0
 
 func isTooNear(w, h, xN, yN):
 	var bottom = false
@@ -68,6 +68,7 @@ func getWorst(w, h):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
+	
 	timeb4+=delta
 	if timeb4 > 0.5:
 		globFallStart=false

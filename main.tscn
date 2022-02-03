@@ -17,6 +17,7 @@ fog_depth_end = 30.5
 fog_depth_curve = 0.840897
 
 [node name="mainNode" type="Spatial"]
+pause_mode = 2
 script = ExtResource( 4 )
 
 [node name="FirstPerson" parent="." instance=ExtResource( 2 )]

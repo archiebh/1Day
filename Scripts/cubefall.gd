@@ -15,7 +15,7 @@ func nearestFive(num):
 	return 2.25 + (floor((num+2)/4)*4)
 
 func _ready():
-	
+	audio.
 	var xOff
 	var yOff
 	if get_node("/root/mainNode").blockInstance == 0:
