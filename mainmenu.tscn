@@ -31,37 +31,165 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.029, 6, 16.201 )
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
 follow_viewport_enable = true
 
-[node name="Play" type="Button" parent="Camera/CanvasLayer"]
+[node name="Main" type="Control" parent="Camera/CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="Camera/CanvasLayer/Main"]
 margin_left = 15.0
 margin_top = 225.0
 margin_right = 138.0
 margin_bottom = 265.0
+focus_mode = 0
 theme = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "play"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Settings" type="Button" parent="Camera/CanvasLayer"]
+[node name="Settings" type="Button" parent="Camera/CanvasLayer/Main"]
 margin_left = 14.0
 margin_top = 266.0
 margin_right = 241.0
 margin_bottom = 306.0
+focus_mode = 0
 theme = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "settings"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Button" parent="Camera/CanvasLayer"]
+[node name="Exit" type="Button" parent="Camera/CanvasLayer/Main"]
 margin_left = 8.0
 margin_top = 305.0
 margin_right = 131.0
 margin_bottom = 345.0
+focus_mode = 0
 theme = ExtResource( 4 )
+enabled_focus_mode = 0
 text = "exit"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Control" parent="Camera/CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music" type="Label" parent="Camera/CanvasLayer/Settings"]
+margin_left = 20.0
+margin_top = 230.0
+margin_right = 158.0
+margin_bottom = 264.0
+theme = ExtResource( 4 )
+text = "music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="musicslider" type="HSlider" parent="Camera/CanvasLayer/Settings/music"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 57.0
+margin_top = -10.0
+margin_right = 260.0
+margin_bottom = 6.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fov2" type="Label" parent="Camera/CanvasLayer/Settings"]
+margin_left = 22.0
+margin_top = 148.0
+margin_right = 160.0
+margin_bottom = 182.0
+theme = ExtResource( 4 )
+text = "fov"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fovslider" type="HSlider" parent="Camera/CanvasLayer/Settings/fov2"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 55.0
+margin_top = -10.0
+margin_right = 258.0
+margin_bottom = 6.0
+theme = ExtResource( 4 )
+min_value = 50.0
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfx" type="Label" parent="Camera/CanvasLayer/Settings"]
+margin_left = 20.0
+margin_top = 188.0
+margin_right = 158.0
+margin_bottom = 222.0
+theme = ExtResource( 4 )
+text = "sfx"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sfxslider" type="HSlider" parent="Camera/CanvasLayer/Settings/sfx"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 57.0
+margin_top = -10.0
+margin_right = 260.0
+margin_bottom = 6.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resolution" type="Button" parent="Camera/CanvasLayer/Settings"]
+margin_left = 14.0
+margin_top = 266.0
+margin_right = 474.0
+margin_bottom = 306.0
+rect_pivot_offset = Vector2( -293, 20 )
+focus_mode = 0
+theme = ExtResource( 4 )
+enabled_focus_mode = 0
+text = "detect resolution"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Camera/CanvasLayer/Settings"]
+margin_left = 14.0
+margin_top = 305.0
+margin_right = 143.0
+margin_bottom = 345.0
+rect_pivot_offset = Vector2( -293, 20 )
+focus_mode = 0
+theme = ExtResource( 4 )
+enabled_focus_mode = 0
+text = "back"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,4 +197,7 @@ __meta__ = {
 
 [node name="lvl1" parent="." instance=ExtResource( 1 )]
 
-[connection signal="pressed" from="Camera/CanvasLayer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/Main/Play" to="." method="_on_Play_pressed"]
+[connection signal="value_changed" from="Camera/CanvasLayer/Settings/music/musicslider" to="." method="_on_musicslider_value_changed"]
+[connection signal="value_changed" from="Camera/CanvasLayer/Settings/fov2/fovslider" to="." method="_on_fovslider_value_changed"]
+[connection signal="value_changed" from="Camera/CanvasLayer/Settings/sfx/sfxslider" to="." method="_on_sfxslider_value_changed"]

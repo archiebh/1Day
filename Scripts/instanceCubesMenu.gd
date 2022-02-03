@@ -7,7 +7,8 @@ var timeb4 = 0
 var globBlockInstance=0
 
 var globWaveCount=0
-
+var musicvol = 100
+var soundvol = 100
 var hierPass
 
 var globMostHeight=0
@@ -54,4 +55,19 @@ func _process(delta):
 
 func _on_Play_pressed():
 	get_tree().change_scene("res://main.tscn")
+	pass # Replace with function body.
+
+
+func _on_fovslider_value_changed(value):
+	camera.fov = value
+	pass # Replace with function body.
+
+
+func _on_musicslider_value_changed(value):
+	musicvol = value
+	pass # Replace with function body.
+
+
+func _on_sfxslider_value_changed(value):
+	soundvol = value
 	pass # Replace with function body.
