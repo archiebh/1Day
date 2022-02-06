@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/level1menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/instanceCubesMenu.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/pixel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/theme.tres" type="Theme" id=4]
 [ext_resource path="res://Audio/mainmenu demo.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Textures/logo.png" type="Texture" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -327,9 +328,9 @@ __meta__ = {
 
 [node name="Highscore" type="Label" parent="Camera/CanvasLayer"]
 margin_left = 489.213
-margin_top = -151.429
+margin_top = -121.429
 margin_right = 906.213
-margin_bottom = -117.429
+margin_bottom = -87.4286
 theme = ExtResource( 4 )
 text = "Highscore : "
 align = 2
@@ -337,6 +338,11 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="Camera/CanvasLayer"]
+position = Vector2( 463.499, 95.7143 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Camera"]
 transform = Transform( 2.742, 0, 0, 0, -6.23324e-08, -2.215, 0, 1.426, -9.68207e-08, 0, 0, -2 )
