@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/breakbeat.mp3-2dd8051c5fd45391540907ae9b64c444.mp3str"
+
+[deps]
+
+source_file="res://Audio/breakbeat.mp3"
+dest_files=[ "res://.import/breakbeat.mp3-2dd8051c5fd45391540907ae9b64c444.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
