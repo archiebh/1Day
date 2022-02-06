@@ -10,9 +10,9 @@ var globWaveCount=0
 var musicvol = 100
 var soundvol = 100
 var hierPass
-
+var highscore = 0
 var globMostHeight=0
-
+const zero = 0
 var globFallStart=false
 onready var sfxSlide = $Camera/CanvasLayer/Settings/sfx/sfxslider
 onready var fovSlide = $Camera/CanvasLayer/Settings/fov2/fovslider
@@ -23,7 +23,9 @@ onready var music = $AudioStreamPlayer
 onready var camera = $Camera
 onready var waterblock = get_node("lvl1/water")
 onready var block = get_node("lvl1/floor/CSGBox")
+onready var highlabel = $Camera/CanvasLayer/Highscore
 const SAVE_FILE_PATH = "user://savesettings.save"
+const SAVE_FILE_HIGHSCORE_PATH = "user://savedata.save"
 var globRot =0
 var globXnum =0
 var globZnum =0
@@ -32,7 +34,16 @@ var globWidth =0
 var globHeight =0
 var random = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
+func loadhighscore():
+	var save_data = File.new()
+	if save_data.file_exists(SAVE_FILE_HIGHSCORE_PATH):
+		save_data.open(SAVE_FILE_HIGHSCORE_PATH, File.READ)
+		highscore = save_data.get_var()
+		save_data.close()
+		highlabel.text = "Highscore : " + str(int(round(highscore)))
+
 func _ready():
+	loadhighscore()
 	Engine.target_fps = 60
 	loadSettings()
 	pass
@@ -85,6 +96,11 @@ func loadSettings():
 		save_data.close()
 	
 	
+func savehighscore():
+	var save_data = File.new()
+	save_data.open(SAVE_FILE_HIGHSCORE_PATH, File.WRITE)
+	save_data.store_var(zero)
+	save_data.close()
 
 func _on_Play_pressed():
 	get_tree().change_scene("res://main.tscn")
@@ -134,3 +150,8 @@ func _on_Settings_pressed():
 
 func _on_Exit_pressed():
 	get_tree().quit()
+
+
+func _on_Reset_pressed():
+	savehighscore()
+	loadhighscore()

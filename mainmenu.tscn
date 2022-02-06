@@ -12,7 +12,7 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.57
 fog_enabled = true
 fog_color = Color( 0, 0, 0, 1 )
-fog_sun_color = Color( 0.937255, 0.937255, 0.937255, 1 )
+fog_sun_color = Color( 0, 0, 0, 1 )
 fog_depth_begin = 5.6
 fog_depth_end = 30.5
 fog_depth_curve = 0.840897
@@ -168,10 +168,10 @@ __meta__ = {
 }
 
 [node name="music" type="Label" parent="Camera/CanvasLayer/Settings"]
-margin_left = 20.0
-margin_top = 230.0
-margin_right = 158.0
-margin_bottom = 264.0
+margin_left = 20.9271
+margin_top = 192.857
+margin_right = 158.927
+margin_bottom = 226.857
 theme = ExtResource( 4 )
 text = "music"
 __meta__ = {
@@ -196,10 +196,10 @@ __meta__ = {
 }
 
 [node name="fov2" type="Label" parent="Camera/CanvasLayer/Settings"]
-margin_left = 22.0
-margin_top = 148.0
-margin_right = 160.0
-margin_bottom = 182.0
+margin_left = 22.9271
+margin_top = 110.857
+margin_right = 160.927
+margin_bottom = 144.857
 theme = ExtResource( 4 )
 text = "fov"
 __meta__ = {
@@ -224,10 +224,10 @@ __meta__ = {
 }
 
 [node name="sfx" type="Label" parent="Camera/CanvasLayer/Settings"]
-margin_left = 20.0
-margin_top = 188.0
-margin_right = 158.0
-margin_bottom = 222.0
+margin_left = 20.9271
+margin_top = 150.857
+margin_right = 158.927
+margin_bottom = 184.857
 theme = ExtResource( 4 )
 text = "sfx"
 __meta__ = {
@@ -252,10 +252,10 @@ __meta__ = {
 }
 
 [node name="Resolution" type="Button" parent="Camera/CanvasLayer/Settings"]
-margin_left = 14.0
-margin_top = 266.0
-margin_right = 474.0
-margin_bottom = 306.0
+margin_left = 14.9271
+margin_top = 265.714
+margin_right = 474.927
+margin_bottom = 305.714
 rect_pivot_offset = Vector2( -293, 20 )
 focus_mode = 0
 theme = ExtResource( 4 )
@@ -267,10 +267,10 @@ __meta__ = {
 }
 
 [node name="Back" type="Button" parent="Camera/CanvasLayer/Settings"]
-margin_left = 14.0
-margin_top = 305.0
-margin_right = 143.0
-margin_bottom = 345.0
+margin_left = 14.9271
+margin_top = 305.714
+margin_right = 143.927
+margin_bottom = 345.714
 rect_pivot_offset = Vector2( -293, 20 )
 focus_mode = 0
 theme = ExtResource( 4 )
@@ -282,10 +282,10 @@ __meta__ = {
 }
 
 [node name="reccomended" type="Label" parent="Camera/CanvasLayer/Settings"]
-margin_left = 246.356
-margin_top = 132.857
-margin_right = 587.356
-margin_bottom = 166.857
+margin_left = 247.283
+margin_top = 95.7143
+margin_right = 588.283
+margin_bottom = 129.714
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 4 )
 text = "recommended"
@@ -310,6 +310,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Reset" type="Button" parent="Camera/CanvasLayer/Settings"]
+margin_left = -9.35857
+margin_top = 228.571
+margin_right = 450.641
+margin_bottom = 268.571
+rect_pivot_offset = Vector2( -293, 20 )
+focus_mode = 0
+theme = ExtResource( 4 )
+enabled_focus_mode = 0
+text = "reset highscore"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highscore" type="Label" parent="Camera/CanvasLayer"]
+margin_left = 489.213
+margin_top = -151.429
+margin_right = 906.213
+margin_bottom = -117.429
+theme = ExtResource( 4 )
+text = "Highscore : "
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MeshInstance" type="MeshInstance" parent="Camera"]
 transform = Transform( 2.742, 0, 0, 0, -6.23324e-08, -2.215, 0, 1.426, -9.68207e-08, 0, 0, -2 )
 visible = false
@@ -323,3 +351,4 @@ material/0 = SubResource( 3 )
 [connection signal="value_changed" from="Camera/CanvasLayer/Settings/fov2/fovslider" to="." method="_on_fovslider_value_changed"]
 [connection signal="value_changed" from="Camera/CanvasLayer/Settings/sfx/sfxslider" to="." method="_on_sfxslider_value_changed"]
 [connection signal="pressed" from="Camera/CanvasLayer/Settings/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/Settings/Reset" to="." method="_on_Reset_pressed"]
