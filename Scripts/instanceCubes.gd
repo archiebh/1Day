@@ -9,11 +9,11 @@ var globBlockInstance=0
 var globWaveCount=0
 
 var hierPass
-
+var unpause = 0
 var globMostHeight=0
 
 var globFallStart=false
-
+onready var pausemenu = $PauseMenu
 var globRot =0
 var globXnum =0
 var globZnum =0
@@ -26,7 +26,7 @@ func _ready():
 	Engine.target_fps = 60
 	pass
 var pause = 0
-
+var paused = 0
 func isTooNear(w, h, xN, yN):
 	var bottom = false
 	var top = false
@@ -68,7 +68,11 @@ func getWorst(w, h):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
-	
+	if Input.is_action_just_pressed("esc") and global.dead == 0:
+		get_tree().paused = true
+		paused = 1
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		pausemenu.visible = 1
 	timeb4+=delta
 	if timeb4 > 0.5:
 		globFallStart=false
@@ -87,3 +91,16 @@ func _process(delta):
 			hierPass+=1
 			
 		timeb4=0
+
+
+func _on_Continue_pressed():
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	pausemenu.visible = 0
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	paused = 0
+
+
+func _on_Exit_pressed():
+	get_tree().paused = false
+	get_tree().change_scene("res://mainmenu.tscn")

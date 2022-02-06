@@ -10,6 +10,7 @@ var walljump = 1
 var todo = 0
 const gravconst = 30
 var score = 0
+var paused = 0
 var highscore = 0
 const SAVE_FILE_PATH = "user://savedata.save"
 var jumping
@@ -100,12 +101,14 @@ func kill():
 		deathlabel.text = "Drowned!\nScore : "+str(int(round(score))-2)+"\nHigh Score : "+str(int(round(highscore)))+"\n\nClick to restart"
 		deathlabel.visible = true
 		scorelabel.visible = false
+		global.dead = 1
 		dead = 1
 	if squashed == 1 and dead == 0:
 		savehighscore()
 		deathlabel.text = "Crushed!\nScore : "+str(int(round(score))-2)+"\nHigh Score : "+str(int(round(highscore)))+"\n\nClick to restart"
 		deathlabel.visible = true
 		scorelabel.visible = false
+		global.dead = 1
 		dead = 1
 func restart():
 	get_tree().reload_current_scene()
@@ -116,6 +119,7 @@ func _process(delta):
 	setscore()
 	if dead == 1 and Input.is_action_pressed("leftclick"):
 		restart()
+		global.dead = 0
 	water.volume_db = 4-(translation.y - waterblock.translation.y)
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors
 	if Engine.get_frames_per_second() > Engine.iterations_per_second:
