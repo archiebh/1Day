@@ -10,12 +10,14 @@ onready var water = get_node("/root/mainNode/lvl1/water")
 var stopped=false
 var begin = false
 var waved=false
+var shadowDelay=0
 onready var csg = $CSGCombiner
 
 func nearestFive(num):
 	return 2.25 + (floor((num+2)/4)*4)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	csg.cast_shadow = false
 	hier = get_node("/root/mainNode").hierPass
 	var xNum = get_node("/root/mainNode").globXnum
 	var zNum = get_node("/root/mainNode").globZnum
@@ -73,6 +75,10 @@ func _process(delta):
 				csg.cast_shadow = false
 				if translation.y > get_node("/root/mainNode").globMostHeight:
 					get_node("/root/mainNode").globMostHeight = translation.y
-				
+	
+	if begin and shadowDelay < 5:
+		shadowDelay+=1
+	if shadowDelay > 4:
+		csg.cast_shadow = true
 	if translation.y+10 < water.translation.y:
 		queue_free()
