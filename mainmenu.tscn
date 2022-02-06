@@ -101,7 +101,7 @@ anims/rotate = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.029, 13, 15.201 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.029, 31, 15.201 )
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
