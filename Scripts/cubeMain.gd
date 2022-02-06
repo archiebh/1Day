@@ -76,9 +76,9 @@ func _process(delta):
 				if translation.y > get_node("/root/mainNode").globMostHeight:
 					get_node("/root/mainNode").globMostHeight = translation.y
 	
-	if begin and shadowDelay < 5:
+	if begin and shadowDelay < 10:
 		shadowDelay+=1
-	if shadowDelay > 4:
+	if shadowDelay > 9 and not csg.cast_shadow:
 		csg.cast_shadow = true
 	if translation.y+10 < water.translation.y:
 		queue_free()
