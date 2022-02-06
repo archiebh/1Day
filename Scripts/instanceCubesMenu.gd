@@ -14,12 +14,16 @@ var hierPass
 var globMostHeight=0
 
 var globFallStart=false
+onready var sfxSlide = $Camera/CanvasLayer/Settings/sfx/sfxslider
+onready var fovSlide = $Camera/CanvasLayer/Settings/fov2/fovslider
+onready var musicSlide = $Camera/CanvasLayer/Settings/music/musicslider
 onready var main = $Camera/CanvasLayer/Main
 onready var settings = $Camera/CanvasLayer/Settings
 onready var music = $AudioStreamPlayer
 onready var camera = $Camera
 onready var waterblock = get_node("lvl1/water")
 onready var block = get_node("lvl1/floor/CSGBox")
+const SAVE_FILE_PATH = "user://savesettings.save"
 var globRot =0
 var globXnum =0
 var globZnum =0
@@ -30,6 +34,7 @@ var random = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Engine.target_fps = 60
+	loadSettings()
 	pass
 
 func camera():
@@ -56,6 +61,30 @@ func _process(delta):
 			
 		timeb4=0
 
+
+func saveSettings():
+	var save_data = File.new()
+	save_data.open(SAVE_FILE_PATH, File.WRITE)
+	var a = [fovSlide.value, sfxSlide.value, musicSlide.value]
+	save_data.store_csv_line(a)
+	save_data.close()
+	
+func loadSettings():
+	var save_data = File.new()
+	if save_data.file_exists(SAVE_FILE_PATH):
+		var settingLoad
+		save_data.open(SAVE_FILE_PATH, File.READ)
+		settingLoad = save_data.get_csv_line()
+		fovSlide.value = int(settingLoad[0])
+		sfxSlide.value = int(settingLoad[1])
+		musicSlide.value = int(settingLoad[2])
+		_on_fovslider_value_changed(fovSlide.value)
+		_on_sfxslider_value_changed(sfxSlide.value)
+		_on_musicslider_value_changed(musicSlide.value)
+
+		save_data.close()
+	
+	
 
 func _on_Play_pressed():
 	get_tree().change_scene("res://main.tscn")
@@ -90,6 +119,7 @@ func _on_sfxslider_value_changed(value):
 
 
 func _on_Back_pressed():
+	saveSettings()
 	settings.visible = false
 	main.visible = true
 	
