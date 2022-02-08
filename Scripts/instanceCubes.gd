@@ -104,5 +104,6 @@ func _on_Continue_pressed():
 
 
 func _on_Exit_pressed():
+	global.isInGame=false
 	get_tree().paused = false
 	get_tree().change_scene("res://mainmenu.tscn")
