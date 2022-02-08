@@ -22,8 +22,8 @@ func _ready():
 	var xNum = get_node("/root/mainNode").globXnum
 	var zNum = get_node("/root/mainNode").globZnum
 	var rotNum = get_node("/root/mainNode").globRot
-	translation = Vector3(xNum, get_node("/root/mainNode").globMostHeight+40, zNum)
 	scale = Vector3(get_node("/root/mainNode").globWidth, 1, get_node("/root/mainNode").globHeight)
+	translation = Vector3(xNum, get_node("/root/mainNode").globMostHeight+40, zNum)
 	rotation = Vector3(0, rotNum, 0)
 	get_node("/root/mainNode").globBlockInstance=0
 	add_child(get_node("/root/mainNode").blockCopySrc.instance())
