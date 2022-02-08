@@ -11,5 +11,5 @@ dest_files=[ "res://.import/breakbeat.mp3-2dd8051c5fd45391540907ae9b64c444.mp3st
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

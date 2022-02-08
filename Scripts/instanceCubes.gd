@@ -14,7 +14,6 @@ var globMostHeight=0
 
 var globFallStart=false
 onready var pausemenu = $PauseMenu
-onready var music = $Music
 var globRot =0
 var globXnum =0
 var globZnum =0
@@ -26,7 +25,6 @@ var random = RandomNumberGenerator.new()
 
 func _ready():
 	Engine.target_fps = 60
-	music.volume_db = global.music
 var pause = 0
 var paused = 0
 func isTooNear(w, h, xN, yN):
@@ -73,6 +71,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("esc") and global.dead == 0:
 		get_tree().paused = true
 		paused = 1
+		global.paused = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		pausemenu.visible = 1
 	timeb4+=delta
@@ -101,6 +100,7 @@ func _on_Continue_pressed():
 	pausemenu.visible = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	paused = 0
+	global.paused = false
 
 
 func _on_Exit_pressed():

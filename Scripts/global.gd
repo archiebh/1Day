@@ -5,3 +5,4 @@ var sound = 0
 var fov = 100
 var dead = 0
 var isInGame = false
+var paused = false
