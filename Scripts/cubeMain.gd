@@ -63,7 +63,11 @@ func _process(delta):
 					stopped=true
 					speed=0
 					translation = Vector3(translation.x, nearestFive(yPos), translation.z)
-					audio.play()
+					if global.isInGame:
+						if translation.distance_to(get_node("/root/mainNode/FirstPerson").translation) < 26:
+							audio.play()
+					else:
+						audio.play()
 					csg.cast_shadow = false
 					if translation.y > get_node("/root/mainNode").globMostHeight:
 						get_node("/root/mainNode").globMostHeight = translation.y

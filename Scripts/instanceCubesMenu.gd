@@ -105,6 +105,7 @@ func savehighscore():
 	save_data.close()
 
 func _on_Play_pressed():
+	global.isInGame = true
 	get_tree().change_scene("res://main.tscn")
 	pass # Replace with function body.
 
