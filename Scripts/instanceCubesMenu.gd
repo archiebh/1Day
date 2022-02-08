@@ -87,12 +87,14 @@ func loadSettings():
 		save_data.open(SAVE_FILE_PATH, File.READ)
 		settingLoad = save_data.get_csv_line()
 		fovSlide.value = int(settingLoad[0])
+		global.fov = fovSlide.value
 		sfxSlide.value = int(settingLoad[1])
+		global.sound = sfxSlide.value
 		musicSlide.value = int(settingLoad[2])
+		global.music = musicSlide.value
 		_on_fovslider_value_changed(fovSlide.value)
 		_on_sfxslider_value_changed(sfxSlide.value)
 		_on_musicslider_value_changed(musicSlide.value)
-
 		save_data.close()
 	
 	

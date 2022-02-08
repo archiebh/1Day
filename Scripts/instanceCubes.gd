@@ -14,6 +14,7 @@ var globMostHeight=0
 
 var globFallStart=false
 onready var pausemenu = $PauseMenu
+onready var music = $Music
 var globRot =0
 var globXnum =0
 var globZnum =0
@@ -22,9 +23,10 @@ var globWidth =0
 var globHeight =0
 var random = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	Engine.target_fps = 60
-	pass
+	music.volume_db = global.music
 var pause = 0
 var paused = 0
 func isTooNear(w, h, xN, yN):

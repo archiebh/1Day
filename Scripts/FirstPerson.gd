@@ -27,6 +27,7 @@ var gravity_vec = Vector3()
 var movement = Vector3()
 var dead = 0
 var squashed = 0
+onready var waterscale = global.sound
 onready var head = $Head
 onready var camera = $Head/Camera
 onready var melee_anim = $AnimationPlayer
@@ -48,7 +49,9 @@ func _ready():
 	loadhighscore()
 	water.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	walksound.volume_db = global.sound
+	sprintsound.volume_db = global.sound
+	jumpsound.volume_db = global.sound
 func _input(event):
 	#get mouse input for camera rotation
 	if event is InputEventMouseMotion:
@@ -120,7 +123,7 @@ func _process(delta):
 	if dead == 1 and Input.is_action_pressed("leftclick"):
 		restart()
 		global.dead = 0
-	water.volume_db = 4-(translation.y - waterblock.translation.y)
+	water.volume_db = global.sound-(translation.y - waterblock.translation.y)
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors
 	if Engine.get_frames_per_second() > Engine.iterations_per_second:
 		camera.set_as_toplevel(true)

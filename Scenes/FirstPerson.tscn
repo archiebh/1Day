@@ -151,5 +151,5 @@ wait_time = 0.01
 transform = Transform( 0.392, 0, 0, 0, 1, 0, 0, 0, 0.392, 0, 0.322, 0 )
 shape = SubResource( 12 )
 
-[connection signal="timeout" from="Timer" to="." method="StrikeTimeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="StrikeTimeout"]
