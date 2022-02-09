@@ -21,8 +21,9 @@ func shuffleList(list):
 	reallist = shuffledList
 	return shuffledList
 
-func play():
-	var choose = reallist[count]
+func play(c):
+	c = c%3
+	var choose = reallist[c]
 	stop()
 	if choose == 0:
 		track1.play()
@@ -30,6 +31,7 @@ func play():
 		track2.play()
 	if choose == 2:
 		track3.play()
+	count+=1
 
 func setvolume():
 	track1.volume_db = global.music
@@ -42,17 +44,16 @@ func stop():
 	track3.stop()
 	
 func _process(delta):
-	if global.paused == true:
+	if global.paused == true and lowpass.cutoff_hz != 500:
 		lowpass.cutoff_hz = 500
-	elif global.paused == false:
+	elif global.paused == false and lowpass.cutoff_hz != 20500:
 		lowpass.cutoff_hz = 20500
 	if global.isInGame == false:
 		stop()
 	if global.isInGame == true and count == 0:
 		shuffleList([0,1,2])
 		setvolume()
-		play()
-		count = count + 1
+		play(count)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -60,12 +61,12 @@ func _process(delta):
 
 
 func _on_Track1_finished():
-	play()
+	play(count)
 
 
 func _on_Track2_finished():
-	play()
+	play(count)
 
 
 func _on_Track3_finished():
-	play()
+	play(count)

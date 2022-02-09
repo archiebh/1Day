@@ -117,8 +117,8 @@ func restart():
 	get_tree().reload_current_scene()
 
 func _process(delta):
-	kill()
 	teleport()
+	kill()
 	setscore()
 	if dead == 1 and Input.is_action_pressed("leftclick"):
 		restart()
