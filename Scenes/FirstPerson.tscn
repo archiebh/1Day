@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/FirstPerson.gd" type="Script" id=1]
 [ext_resource path="res://Audio/running.mp3" type="AudioStream" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Audio/walking.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Audio/waterloop.wav" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Scripts/sgader.gdshader" type="Shader" id=7]
+[ext_resource path="res://Audio/down.mp3" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -23,6 +25,12 @@ default_font = ExtResource( 6 )
 Label/colors/font_color = Color( 1, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0.298039, 0.0745098, 0.0745098, 0.392157 )
 Label/fonts/font = null
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 7 )
+shader_param/blur_center = Vector2( 0.5, 0 )
+shader_param/blur_power = 0.06
+shader_param/sampling_count = 2
 
 [sub_resource type="Animation" id=8]
 resource_name = "Block"
@@ -105,6 +113,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Shader" type="ColorRect" parent="Head/CanvasLayer"]
+visible = false
+material = SubResource( 17 )
+margin_right = 641.0
+margin_bottom = 364.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="slash" type="AudioStreamPlayer2D" parent="Head"]
 position = Vector2( 289, 167 )
 
@@ -125,6 +142,9 @@ stream = ExtResource( 2 )
 
 [node name="water" type="AudioStreamPlayer" parent="Head"]
 stream = ExtResource( 5 )
+
+[node name="down" type="AudioStreamPlayer" parent="Head"]
+stream = ExtResource( 8 )
 
 [node name="cros" type="Sprite" parent="."]
 visible = false
