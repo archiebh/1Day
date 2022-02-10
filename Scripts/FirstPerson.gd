@@ -27,6 +27,7 @@ var gravity_vec = Vector3()
 var movement = Vector3()
 var dead = 0
 var squashed = 0
+var downready = 0
 onready var downsound = $Head/down
 onready var waterscale = global.sound
 onready var head = $Head
@@ -150,8 +151,9 @@ func _physics_process(delta):
 		gravity_vec = Vector3.DOWN * 25
 		shader.visible = true
 		downsound.play()
-	if Input.is_action_just_released("drop"):
-		gravity_vec = Vector3(0, -20, 0)
+		downready = 1
+	if Input.is_action_just_released("drop") and downready == 0:
+		#gravity_vec = Vector3(0, -20, 0)
 		shader.visible = false
 	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
 		translation -= Vector3(0, 20*delta, 0)
@@ -168,6 +170,8 @@ func _physics_process(delta):
 	if is_on_floor():
 		jumping = 1
 		shader.visible = false
+	if is_on_floor() and not Input.is_action_pressed("drop"):
+		downready = 0
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
@@ -189,11 +193,19 @@ func _physics_process(delta):
 		accel = ACCEL_AIR
 		gravity_vec += Vector3.DOWN * gravity * delta
 		
+	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("drop") and is_on_floor():
+		downready = 0
 	if Input.is_action_pressed("jump") and is_on_floor():
-		snap = Vector3.ZERO
-		gravity_vec = Vector3.UP * jump
-		walljump = 1
-		jumpsound.play()
+		if downready == 1:
+			snap = Vector3.ZERO
+			gravity_vec = Vector3.UP * jump * 1.5
+			walljump = 1
+			jumpsound.play()
+		if downready == 0:
+			snap = Vector3.ZERO
+			gravity_vec = Vector3.UP * jump
+			walljump = 1
+			jumpsound.play()
 	if Input.is_action_just_pressed("jump") and is_on_wall() and walljump == 1:
 		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
