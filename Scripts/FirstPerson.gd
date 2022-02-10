@@ -27,6 +27,7 @@ var gravity_vec = Vector3()
 var movement = Vector3()
 var dead = 0
 var squashed = 0
+onready var downsound = $Head/down
 onready var waterscale = global.sound
 onready var head = $Head
 onready var camera = $Head/Camera
@@ -42,7 +43,7 @@ onready var water = $Head/water
 onready var waterblock = get_node("/root/mainNode/lvl1/water")
 onready var scorelabel = $Head/CanvasLayer/Label
 onready var deathlabel = $Head/CanvasLayer/Label2
-
+onready var shader = $Head/CanvasLayer/Shader
 func _ready():
 	#hides the cursor
 	camera.fov = global.fov
@@ -52,6 +53,7 @@ func _ready():
 	walksound.volume_db = global.sound
 	sprintsound.volume_db = global.sound
 	jumpsound.volume_db = global.sound
+	downsound.volume_db = global.sound
 func _input(event):
 	#get mouse input for camera rotation
 	if event is InputEventMouseMotion:
@@ -144,7 +146,13 @@ func _process(delta):
 
 func _physics_process(delta):
 	#get keyboard input
-	
+	if Input.is_action_just_pressed("drop") and not is_on_floor():
+		gravity_vec = Vector3.DOWN * 25
+		shader.visible = true
+		downsound.play()
+	if Input.is_action_just_released("drop"):
+		gravity_vec = Vector3(0, -20, 0)
+		shader.visible = false
 	if len(upbox.get_overlapping_areas()) > 0 and is_on_ceiling():
 		translation -= Vector3(0, 20*delta, 0)
 		gravity_vec = Vector3.DOWN
@@ -159,6 +167,7 @@ func _physics_process(delta):
 		jumping = 1
 	if is_on_floor():
 		jumping = 1
+		shader.visible = false
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
