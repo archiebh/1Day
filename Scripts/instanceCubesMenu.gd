@@ -64,8 +64,8 @@ func _process(delta):
 			globXnum = random.randf_range(-2, 2)
 			globZnum = random.randf_range(-2, 2)
 			globRot = random.randf_range(0, 2*PI)
-			globBlockSize = random.randf_range(1, 5)
-			globWidth = random.randf_range(0.5, globBlockSize-0.2)
+			globBlockSize = random.randf_range(1, 5)*4
+			globWidth = random.randf_range(2, globBlockSize-0.8)
 			globHeight = globBlockSize - globWidth
 			add_child(blockSrc.instance())
 			hierPass+=6
