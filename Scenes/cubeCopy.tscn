@@ -11,7 +11,7 @@ use_collision = true
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
 use_collision = true
-width = 4.0
-height = 4.0
-depth = 4.0
+width = 1.0
+height = 1.0
+depth = 1.0
 material = ExtResource( 2 )

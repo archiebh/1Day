@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/waterrise.gd" type="Script" id=1]
 [ext_resource path="res://Materials/frame_0_delay-0.25s.png" type="Texture" id=2]
@@ -23,6 +23,10 @@ frame_3/delay_sec = 0.0
 flags_world_triplanar = true
 albedo_texture = SubResource( 5 )
 uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+albedo_color = Color( 1, 0, 0, 0.309804 )
 
 [node name="Spatial2" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
@@ -58,3 +62,11 @@ transform = Transform( 0.333333, 0, 0, 0, 3.97496e-09, 1, 0, -0.333333, 1.32499e
 light_energy = 0.418
 shadow_enabled = true
 shadow_color = Color( 1, 0, 0, 1 )
+
+[node name="CSGBox" type="CSGBox" parent="water"]
+transform = Transform( 0.333333, 0, 0, 0, 1, 0, 0, 0, 0.333333, 0, 17, 0 )
+invert_faces = true
+width = 25.0
+height = 50.0
+depth = 25.0
+material = SubResource( 6 )
