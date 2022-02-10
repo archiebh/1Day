@@ -22,15 +22,15 @@ max_db = 0.517
 use_collision = true
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
-width = 4.0
-height = 4.0
-depth = 4.0
+width = 1.0
+height = 1.0
+depth = 1.0
 material = SubResource( 2 )
 
 [node name="Area" type="Area" parent="CSGCombiner/CSGBox" groups=["blocks"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="CSGCombiner/CSGBox/Area"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_AudioStreamPlayer3D_finished"]

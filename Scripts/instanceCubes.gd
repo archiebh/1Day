@@ -81,13 +81,13 @@ func _process(delta):
 		globWaveCount=0
 		hierPass=0
 		for i in range(6):
-			globBlockSize = random.randf_range(1, 5)
-			globWidth = random.randf_range(0.5, globBlockSize-0.2)
-			globHeight = globBlockSize - globWidth
+			globBlockSize = random.randf_range(1, 5)*4
+			globWidth = random.randf_range(2, globBlockSize-0.8)
+			globHeight = (globBlockSize - globWidth)
 			globRot = random.randf_range(0, 2*PI)
 			var safetyMeasure = getWorst(globWidth, globHeight)
-			globXnum = random.randf_range(-24+safetyMeasure, 24-safetyMeasure)
-			globZnum = random.randf_range(-24+safetyMeasure, 24-safetyMeasure)
+			globXnum = random.randf_range((-25)+safetyMeasure, 25-safetyMeasure)
+			globZnum = random.randf_range((-25)+safetyMeasure, 25-safetyMeasure)
 			add_child(blockSrc.instance())
 			hierPass+=1
 			
