@@ -45,7 +45,7 @@ onready var waterblock = get_node("/root/mainNode/lvl1/water")
 onready var scorelabel = $Head/CanvasLayer/Label
 onready var deathlabel = $Head/CanvasLayer/Label2
 onready var shader = $Head/CanvasLayer/Shader
-
+onready var sky = global.playery
 func _ready():
 	#hides the cursor
 	camera.fov = global.fov
@@ -125,6 +125,7 @@ func _process(delta):
 	teleport()
 	kill()
 	setscore()
+	global.playery = translation.y
 	if dead == 1 and Input.is_action_pressed("leftclick"):
 		restart()
 		global.dead = 0

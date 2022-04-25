@@ -26,6 +26,9 @@ onready var layer1 = $Layer1
 onready var layer2 = $Layer2
 onready var layer3 = $Layer3
 onready var layer4 = $Layer4
+onready var playery = global.playery
+onready var watery = global.watery
+onready var difference
 func _ready():
 	layer1.play()
 	layer2.play()
@@ -75,6 +78,8 @@ func getWorst(w, h):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
+	difference = global.playery - watery
+	print(str(difference))
 	if Input.is_action_just_pressed("esc") and global.dead == 0:
 		get_tree().paused = true
 		paused = 1
