@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Pi Layer 4.mp3-c6574423052724d4492a038e7ba20220.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music Update/Pi Layer 4.mp3"
+dest_files=[ "res://.import/Pi Layer 4.mp3-c6574423052724d4492a038e7ba20220.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
