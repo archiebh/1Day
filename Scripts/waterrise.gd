@@ -5,7 +5,7 @@ var speed = 1.5
 
 
 func getSpeedIdeal():
-	return (get_node("/root/mainNode").globMostHeight-translation.y)/5
+	return (get_node("/root/mainNode").globMostHeight-translation.y)/7
 	
 
 # Called when the node enters the scene tree for the first time.
