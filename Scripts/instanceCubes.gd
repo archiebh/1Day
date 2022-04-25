@@ -29,6 +29,11 @@ onready var layer4 = $Layer4
 onready var playery = global.playery
 onready var watery = global.watery
 onready var difference
+onready var newdifference
+onready var onemod
+onready var twomod
+onready var threemod
+onready var fourmod
 func _ready():
 	layer1.play()
 	layer2.play()
@@ -76,10 +81,37 @@ func getWorst(w, h):
 	var v = sqrt ( aS + bS )
 	return v
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-
+func setvolume():
+	onemod = -((difference - 18)/10)
+	if onemod < 0:
+		onemod = 0
+	if onemod > 1:
+		onemod = 1
+	layer1.volume_db = onemod*40 - 40
+	twomod = -((difference - 15)/10)
+	if twomod < 0:
+		twomod = 0
+	if twomod > 1:
+		twomod = 1
+	print(str(twomod))
+	layer2.volume_db = twomod*40 - 40
+	threemod = ((difference - 15)/10)
+	if threemod < 0:
+		threemod = 0
+	if threemod > 1:
+		threemod = 1
+	print(str(threemod))
+	layer3.volume_db = threemod*40 - 40
+	fourmod = ((difference - 20)/10)
+	if fourmod < 0:
+		fourmod = 0
+	if fourmod > 1:
+		fourmod = 1
+	print(str(fourmod))
+	layer4.volume_db = fourmod*40 - 40
 func _process(delta):
 	difference = global.playery - global.watery
-	print(str(difference))
+	setvolume()
 	if Input.is_action_just_pressed("esc") and global.dead == 0:
 		get_tree().paused = true
 		paused = 1
