@@ -78,7 +78,7 @@ func getWorst(w, h):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta):
-	difference = global.playery - watery
+	difference = global.playery - global.watery
 	print(str(difference))
 	if Input.is_action_just_pressed("esc") and global.dead == 0:
 		get_tree().paused = true
