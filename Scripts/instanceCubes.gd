@@ -22,8 +22,15 @@ var globWidth =0
 var globHeight =0
 var random = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
-
+onready var layer1 = $Layer1
+onready var layer2 = $Layer2
+onready var layer3 = $Layer3
+onready var layer4 = $Layer4
 func _ready():
+	layer1.play()
+	layer2.play()
+	layer3.play()
+	layer4.play()
 	Engine.target_fps = 60
 var pause = 0
 var paused = 0

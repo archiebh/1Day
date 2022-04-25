@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/waterrise.gd" type="Script" id=1]
 [ext_resource path="res://Materials/frame_0_delay-0.25s.png" type="Texture" id=2]
 [ext_resource path="res://Materials/frame_1_delay-0.25s.png" type="Texture" id=3]
 [ext_resource path="res://Materials/frame_3_delay-0.25s.png" type="Texture" id=4]
 [ext_resource path="res://Materials/frame_2_delay-0.25s.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/unimusic.gd" type="Script" id=10]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -26,6 +27,7 @@ uv1_triplanar = true
 
 [node name="Spatial2" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+script = ExtResource( 10 )
 
 [node name="floor" type="CSGCombiner" parent="."]
 transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0 )

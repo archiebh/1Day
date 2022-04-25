@@ -45,6 +45,7 @@ onready var waterblock = get_node("/root/mainNode/lvl1/water")
 onready var scorelabel = $Head/CanvasLayer/Label
 onready var deathlabel = $Head/CanvasLayer/Label2
 onready var shader = $Head/CanvasLayer/Shader
+
 func _ready():
 	#hides the cursor
 	camera.fov = global.fov
@@ -55,6 +56,7 @@ func _ready():
 	sprintsound.volume_db = global.sound
 	jumpsound.volume_db = global.sound
 	downsound.volume_db = global.sound
+
 func _input(event):
 	#get mouse input for camera rotation
 	if event is InputEventMouseMotion:

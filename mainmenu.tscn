@@ -98,9 +98,6 @@ autoplay = true
 anims/RESET = SubResource( 4 )
 anims/rotate = SubResource( 5 )
 
-[node name="handler" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 )
-
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.029, 31, 15.201 )
 current = true
@@ -349,6 +346,9 @@ transform = Transform( 2.742, 0, 0, 0, -6.23324e-08, -2.215, 0, 1.426, -9.68207e
 visible = false
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
+
+[node name="handler" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 )
 
 [connection signal="pressed" from="Camera/CanvasLayer/Main/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/Main/Settings" to="." method="_on_Settings_pressed"]
