@@ -82,27 +82,27 @@ func getWorst(w, h):
 	return v
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func setvolume():
-	onemod = -((difference - 18)/10)
+	onemod = -((difference - 20)/20)
 	if onemod < 0:
 		onemod = 0
 	if onemod > 1:
 		onemod = 1
 	layer1.volume_db = onemod*40 - 40
-	twomod = -((difference - 15)/10)
+	twomod = -((difference - 20)/20)
 	if twomod < 0:
 		twomod = 0
 	if twomod > 1:
 		twomod = 1
 	print(str(twomod))
 	layer2.volume_db = twomod*40 - 40
-	threemod = ((difference - 15)/10)
+	threemod = ((difference - 20)/20)
 	if threemod < 0:
 		threemod = 0
 	if threemod > 1:
 		threemod = 1
 	print(str(threemod))
 	layer3.volume_db = threemod*40 - 40
-	fourmod = ((difference - 20)/10)
+	fourmod = ((difference - 20)/20)
 	if fourmod < 0:
 		fourmod = 0
 	if fourmod > 1:
